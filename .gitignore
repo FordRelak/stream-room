@@ -686,3 +686,4 @@ dist
 
 # SvelteKit build / generate output
 .svelte-kit
+/stream-room-schemas.drawio
