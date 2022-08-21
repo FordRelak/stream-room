@@ -687,3 +687,4 @@ dist
 # SvelteKit build / generate output
 .svelte-kit
 /stream-room-schemas.drawio
+/src/StreamRoom.WebApi/appsettings.Development.json
