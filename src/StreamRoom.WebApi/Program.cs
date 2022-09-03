@@ -1,21 +1,22 @@
-WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+using StreamRoom.Application.GraphQL.Setup;
+using StreamRoom.Infrastructure.Redis.Setup;
+using StreamRoom.WebApi.Setup;
 
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+var builder = WebApplication.CreateBuilder(args);
 
-WebApplication app = builder.Build();
+builder.Services.RegisterRedis(builder.Configuration);
+builder.Services.RegisterJsonOptions();
+builder.Services.RegisterGraphQL();
 
-if (app.Environment.IsDevelopment())
+builder.Services.AddGraphQLServer();
+
+var app = builder.Build();
+
+app.UseRouting();
+
+app.UseEndpoints(endpoints =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
+    endpoints.MapGraphQL();
+});
 
 app.Run();

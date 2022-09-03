@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HotChocolate" Version="12.13.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Filters\" />
+    <Folder Include="Subscriptions\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\StreamRoom.Common\StreamRoom.Common.csproj" />
+    <ProjectReference Include="..\..\Domain\StreamRoom.Domain\StreamRoom.Domain.csproj" />
+    <ProjectReference Include="..\StreamRoom.Application\StreamRoom.Application.csproj" />
+  </ItemGroup>
+
+</Project>
