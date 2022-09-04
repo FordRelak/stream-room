@@ -1,4 +1,5 @@
 ﻿namespace StreamRoom.Common;
+
 public static class StringExtension
 {
     private static readonly string[] endingsOfWords = { "Async", "Mutation", "Query", "Subscription" };

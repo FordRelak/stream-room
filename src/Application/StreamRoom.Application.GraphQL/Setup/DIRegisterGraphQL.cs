@@ -5,6 +5,7 @@ using StreamRoom.Application.GraphQL.Queries.Rooms;
 using StreamRoom.Application.GraphQL.Queries.Users;
 
 namespace StreamRoom.Application.GraphQL.Setup;
+
 public static class DIRegisterGraphQL
 {
     public static IServiceCollection RegisterGraphQL(this IServiceCollection services)

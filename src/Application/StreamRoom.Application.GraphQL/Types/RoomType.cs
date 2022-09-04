@@ -1,4 +1,5 @@
 ﻿namespace StreamRoom.Application.GraphQL.Types;
+
 public class RoomType : ObjectType<Room>
 {
     protected override void Configure(IObjectTypeDescriptor<Room> descriptor)

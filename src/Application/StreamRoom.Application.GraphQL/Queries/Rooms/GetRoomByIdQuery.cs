@@ -1,4 +1,5 @@
 ﻿namespace StreamRoom.Application.GraphQL.Queries.Rooms;
+
 public class GetRoomByIdQuery : ObjectTypeExtension<Query>
 {
     protected override void Configure(IObjectTypeDescriptor<Query> descriptor)

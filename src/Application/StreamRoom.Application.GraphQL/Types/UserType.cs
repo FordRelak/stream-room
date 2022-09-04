@@ -1,4 +1,5 @@
 ﻿namespace StreamRoom.Application.GraphQL.Types;
+
 public class UserType : ObjectType<User>
 {
     protected override void Configure(IObjectTypeDescriptor<User> descriptor)

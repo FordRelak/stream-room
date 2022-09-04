@@ -5,6 +5,7 @@ using StreamRoom.Domain;
 using System.Text.Json;
 
 namespace StreamRoom.Infrastructure.Redis;
+
 public class RedisUserRepository : RedisRepository<User>, IUserRepository
 {
     public RedisUserRepository(

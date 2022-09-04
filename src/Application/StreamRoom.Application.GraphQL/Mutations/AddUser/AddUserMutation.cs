@@ -1,4 +1,5 @@
 ﻿namespace StreamRoom.Application.GraphQL.Mutations.AddUser;
+
 public class AddUserMutation : ObjectTypeExtension<Mutation>
 {
     protected override void Configure(IObjectTypeDescriptor<Mutation> descriptor)

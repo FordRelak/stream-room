@@ -4,6 +4,7 @@ using StackExchange.Redis;
 using StreamRoom.Application;
 
 namespace StreamRoom.Infrastructure.Redis.Setup;
+
 public static class DIRegisterRedis
 {
     public static IServiceCollection RegisterRedis(this IServiceCollection services, IConfiguration configuration)
