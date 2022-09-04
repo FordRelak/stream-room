@@ -1,16 +1,12 @@
-﻿using HotChocolate;
-using HotChocolate.Types;
-using StreamRoom.Application.GraphQL.Common;
-using StreamRoom.Common;
-using StreamRoom.Domain;
+﻿namespace StreamRoom.Application.GraphQL.Queries.Rooms;
 
-namespace StreamRoom.Application.GraphQL.Queries;
-public class GetRooms : ObjectTypeExtension<Query>
+public class GetRoomsQuery : ObjectTypeExtension<Query>
 {
     protected override void Configure(IObjectTypeDescriptor<Query> descriptor)
     {
         descriptor
-            .Field(nameof(GetRooms).ToGqlName())
+            .Field(nameof(GetRoomsQuery).ToGqlName())
+            .Type<RoomType>()
             .ResolveWith<GetRoomsResolver>(resolver => resolver.GetRoomAsync(default!))
             .Description("Get rooms.");
     }
@@ -23,4 +19,3 @@ public class GetRooms : ObjectTypeExtension<Query>
         }
     }
 }
-

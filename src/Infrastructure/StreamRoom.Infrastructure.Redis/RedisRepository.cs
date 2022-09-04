@@ -18,6 +18,9 @@ public abstract class RedisRepository<T> : IRepository<T> where T : Base
     }
     public abstract string HashName { get; }
 
+    protected IDatabase Database => _database;
+    protected JsonSerializerOptions JsonSerializerOptions => _jsonSerializerOptions;
+
     public async Task<T> GetAsync(Guid id)
     {
         var value = await _database.HashGetAsync(HashName, id.ToString());

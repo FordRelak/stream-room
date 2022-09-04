@@ -49,7 +49,7 @@ dotnet_style_namespace_match_folder = true
 dotnet_style_null_propagation = true:warning
 dotnet_style_object_initializer = true:warning
 dotnet_style_operator_placement_when_wrapping = beginning_of_line
-dotnet_style_prefer_auto_properties = true
+dotnet_style_prefer_auto_properties = false
 dotnet_style_prefer_compound_assignment = true
 dotnet_style_prefer_conditional_expression_over_assignment = true
 dotnet_style_prefer_conditional_expression_over_return = true
@@ -124,7 +124,7 @@ csharp_style_prefer_range_operator = true
 csharp_style_prefer_tuple_swap = true
 csharp_style_prefer_utf8_string_literals = true
 csharp_style_throw_expression = true:warning
-csharp_style_unused_value_assignment_preference = discard_variable:none
+csharp_style_unused_value_assignment_preference = discard_variable:silent
 csharp_style_unused_value_expression_statement_preference = unused_local_variable
 
 # 'using' directive preferences
@@ -230,9 +230,6 @@ dotnet_diagnostic.IDE0058.severity = none
 # CA1822: Mark members as static
 dotnet_diagnostic.CA1822.severity = none
 
-# IDE0059: Unnecessary assignment of a value
-dotnet_diagnostic.IDE0059.severity = none
-
 [*.{cs,vb}]
 dotnet_style_operator_placement_when_wrapping = beginning_of_line
 tab_width = 4
@@ -241,7 +238,7 @@ end_of_line = crlf
 dotnet_style_coalesce_expression = true:warning
 dotnet_style_null_propagation = true:warning
 dotnet_style_prefer_is_null_check_over_reference_equality_method = true:warning
-dotnet_style_prefer_auto_properties = true:silent
+dotnet_style_prefer_auto_properties = false:silent
 dotnet_style_object_initializer = true:warning
 dotnet_style_collection_initializer = true:suggestion
 dotnet_style_prefer_simplified_boolean_expressions = true:suggestion
