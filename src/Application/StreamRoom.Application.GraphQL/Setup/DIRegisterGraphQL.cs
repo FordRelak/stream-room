@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using StreamRoom.Application.GraphQL.Filters;
 using StreamRoom.Application.GraphQL.Mutations.AddRoom;
 using StreamRoom.Application.GraphQL.Mutations.AddUser;
 using StreamRoom.Application.GraphQL.Queries.Rooms;
@@ -25,6 +26,7 @@ public static class DIRegisterGraphQL
             .AddTypeExtension<AddRoomMutation>()
             .AddTypeExtension<AddUserMutation>()
 
+            .AddErrorFilter<AppErrorFilter>()
             ;
 
         return services;
