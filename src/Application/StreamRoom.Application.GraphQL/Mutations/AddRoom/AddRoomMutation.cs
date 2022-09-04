@@ -1,10 +1,5 @@
-﻿using HotChocolate;
-using HotChocolate.Types;
-using StreamRoom.Application.GraphQL.Common;
-using StreamRoom.Common;
-using StreamRoom.Domain;
+﻿namespace StreamRoom.Application.GraphQL.Mutations.AddRoom;
 
-namespace StreamRoom.Application.GraphQL.Mutations.AddRoom;
 public class AddRoomMutation : ObjectTypeExtension<Mutation>
 {
     protected override void Configure(IObjectTypeDescriptor<Mutation> descriptor)
@@ -25,7 +20,7 @@ public class AddRoomMutation : ObjectTypeExtension<Mutation>
                 Name = input.Name,
             };
 
-            var a = await roomRepository.InsertAsync(room);
+            await roomRepository.InsertAsync(room);
 
             return new(room.Id);
         }

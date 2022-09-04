@@ -3,6 +3,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace StreamRoom.WebApi.Setup;
+
 public static class DIRegisterJsonOptions
 {
     public static IServiceCollection RegisterJsonOptions(this IServiceCollection services)

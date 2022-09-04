@@ -4,6 +4,7 @@ using StreamRoom.Domain;
 using System.Text.Json;
 
 namespace StreamRoom.Infrastructure.Redis;
+
 public abstract class RedisRepository<T> : IRepository<T> where T : Base
 {
     private readonly JsonSerializerOptions _jsonSerializerOptions;
@@ -16,13 +17,22 @@ public abstract class RedisRepository<T> : IRepository<T> where T : Base
         _jsonSerializerOptions = jsonSerializerOptions;
         _database = connectionMultiplexer.GetDatabase();
     }
-    public abstract string HashName { get; }
 
-    public async Task<T> GetAsync(Guid id)
+    protected abstract string HashName { get; }
+
+    protected IDatabase Database => _database;
+
+    protected JsonSerializerOptions JsonSerializerOptions => _jsonSerializerOptions;
+
+    public Task<T?> GetAsync(Guid id)
     {
-        var value = await _database.HashGetAsync(HashName, id.ToString());
-
-        return JsonSerializer.Deserialize<T>(value, _jsonSerializerOptions);
+        return _database.HashGetAsync(HashName, id.ToString())
+            .ContinueWith(task =>
+            {
+                return task.Result.HasValue ?
+                    JsonSerializer.Deserialize<T>(task.Result!, _jsonSerializerOptions) :
+                    default;
+            }, TaskContinuationOptions.OnlyOnRanToCompletion);
     }
 
     public Task<bool> InsertAsync(T value)
@@ -34,12 +44,14 @@ public abstract class RedisRepository<T> : IRepository<T> where T : Base
         return _database.HashSetAsync(HashName, value.Id.ToString(), serializedValue);
     }
 
-    public async Task<IReadOnlyList<T>> GetAllAsync()
+    public Task<IReadOnlyList<T>> GetAllAsync()
     {
-        var values = await _database.HashGetAllAsync(HashName);
-
-        return !values.Any()
-            ? Array.Empty<T>()
-            : Array.ConvertAll(values, value => JsonSerializer.Deserialize<T>(value.Value, _jsonSerializerOptions)) as IReadOnlyList<T>;
+        return _database.HashGetAllAsync(HashName)
+            .ContinueWith(task =>
+            {
+                return !task.Result.Any()
+                    ? Array.Empty<T>()
+                    : Array.ConvertAll(task.Result, value => JsonSerializer.Deserialize<T>(value.Value!, _jsonSerializerOptions)) as IReadOnlyList<T>;
+            }, TaskContinuationOptions.OnlyOnRanToCompletion);
     }
 }

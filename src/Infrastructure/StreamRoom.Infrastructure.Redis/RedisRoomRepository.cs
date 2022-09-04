@@ -5,6 +5,7 @@ using StreamRoom.Domain;
 using System.Text.Json;
 
 namespace StreamRoom.Infrastructure.Redis;
+
 public class RedisRoomRepository : RedisRepository<Room>, IRoomRepository
 {
     public RedisRoomRepository(
@@ -13,5 +14,11 @@ public class RedisRoomRepository : RedisRepository<Room>, IRoomRepository
     {
     }
 
-    public override string HashName => nameof(Room).ToLower();
+    protected override string HashName => nameof(Room).ToLower();
+
+    public Task<IReadOnlyList<User>> GetRoomUsersAsync(Guid roomId)
+    {
+        return GetAsync(roomId)
+            .ContinueWith(task => task.Result?.Users ?? Array.Empty<User>(), TaskContinuationOptions.OnlyOnRanToCompletion);
+    }
 }

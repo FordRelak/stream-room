@@ -4,6 +4,7 @@ using StackExchange.Redis;
 using StreamRoom.Application;
 
 namespace StreamRoom.Infrastructure.Redis.Setup;
+
 public static class DIRegisterRedis
 {
     public static IServiceCollection RegisterRedis(this IServiceCollection services, IConfiguration configuration)
@@ -11,6 +12,7 @@ public static class DIRegisterRedis
         services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(configuration.GetConnectionString("Redis")));
 
         services.AddScoped<IRoomRepository, RedisRoomRepository>();
+        services.AddScoped<IUserRepository, RedisUserRepository>();
 
         return services;
     }
