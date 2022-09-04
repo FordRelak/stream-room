@@ -12,11 +12,11 @@ public class AddUserMutation : ObjectTypeExtension<Mutation>
 
     private class AddUserRevolver
     {
-        public async Task<AddUserPayload> AddUserAsync(AddUserInput addUserInput, [Service] IUserRepository userRepository)
+        public async Task<AddUserPayload> AddUserAsync(AddUserInput input, [Service] IUserRepository userRepository)
         {
             var newUser = new User
             {
-                Name = addUserInput.Name,
+                Name = input.Name,
             };
 
             await userRepository.InsertAsync(newUser);

@@ -13,10 +13,20 @@ public class RoomType : ObjectType<Room>
 
         descriptor
             .Field(type => type.Users)
+            .ResolveWith<RoomUsersResolver>(resolver => resolver.GetRoomUsersAsync(default!, default!))
+            .Type<UserType>()
             .Description("Room users.");
 
         descriptor
             .Field(type => type.Src)
             .Description("Room media source is playing now.");
+    }
+
+    private class RoomUsersResolver
+    {
+        public Task<IReadOnlyList<User>> GetRoomUsersAsync([Parent] Room room, [Service] IRoomRepository roomRepository)
+        {
+            return roomRepository.GetRoomUsersAsync(room.Id);
+        }
     }
 }

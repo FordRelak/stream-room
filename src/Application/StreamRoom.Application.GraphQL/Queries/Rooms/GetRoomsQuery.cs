@@ -6,7 +6,7 @@ public class GetRoomsQuery : ObjectTypeExtension<Query>
     {
         descriptor
             .Field(nameof(GetRoomsQuery).ToGqlName())
-            .Type<RoomType>()
+            .Type<ListType<RoomType>>()
             .ResolveWith<GetRoomsResolver>(resolver => resolver.GetRoomAsync(default!))
             .Description("Get rooms.");
     }

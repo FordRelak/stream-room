@@ -11,6 +11,7 @@ public static class DIRegisterRedis
         services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(configuration.GetConnectionString("Redis")));
 
         services.AddScoped<IRoomRepository, RedisRoomRepository>();
+        services.AddScoped<IUserRepository, RedisUserRepository>();
 
         return services;
     }
