@@ -5,6 +5,8 @@
         "eamodio.gitlens",
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
-        "stylelint.vscode-stylelint"
+        "stylelint.vscode-stylelint",
+        "steoates.autoimport",
+        "amatiasq.sort-imports"
     ]
 }
