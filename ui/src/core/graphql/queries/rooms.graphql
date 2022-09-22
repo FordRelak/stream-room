@@ -1,0 +1,6 @@
+query Rooms {
+    rooms {
+        id
+        name
+    }
+}
