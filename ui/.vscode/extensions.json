@@ -7,6 +7,8 @@
         "esbenp.prettier-vscode",
         "stylelint.vscode-stylelint",
         "steoates.autoimport",
-        "amatiasq.sort-imports"
+        "amatiasq.sort-imports",
+        "graphql.vscode-graphql",
+        "graphql.vscode-graphql-syntax"
     ]
 }

@@ -11,8 +11,6 @@ import { Subject } from 'rxjs';
 export class DestroyableComponent implements OnDestroy {
     protected readonly _alive$: Subject<void> = new Subject<void>();
 
-    constructor() {}
-
     ngOnDestroy(): void {
         this._alive$.next();
         this._alive$.complete();

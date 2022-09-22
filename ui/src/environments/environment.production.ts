@@ -3,6 +3,6 @@
 import { IEnvironment } from './ienvironment';
 
 export const environment: IEnvironment = {
-    production: false,
-    graphqlUri: 'http://localhost:5255/graphql/',
+    production: true,
+    graphqlUri: '/graphql',
 };
