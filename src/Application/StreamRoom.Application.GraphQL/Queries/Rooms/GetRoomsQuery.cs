@@ -7,13 +7,13 @@ public class GetRoomsQuery : ObjectTypeExtension<Query>
         descriptor
             .Field(nameof(GetRoomsQuery).ToGqlName())
             .Type<ListType<RoomType>>()
-            .ResolveWith<GetRoomsResolver>(resolver => resolver.GetRoomAsync(default!))
+            .ResolveWith<GetRoomsResolver>(resolver => resolver.GetRoomsAsync(default!))
             .Description("Get rooms.");
     }
 
     private class GetRoomsResolver
     {
-        public Task<IReadOnlyList<Room>> GetRoomAsync([Service] IRoomRepository roomRepository)
+        public Task<IReadOnlyList<Room>> GetRoomsAsync([Service] IRoomRepository roomRepository)
         {
             return roomRepository.GetAllAsync();
         }

@@ -7,6 +7,7 @@ public class GetRoomByIdQuery : ObjectTypeExtension<Query>
         descriptor
             .Field(nameof(GetRoomByIdQuery).ToGqlName())
             .Argument("id", argument => argument.Type<NonNullType<IdType>>())
+            .Type<RoomType>()
             .ResolveWith<GetRoomByIdResolver>(resolver => resolver.GetRoomByIdAsync(default!, default!))
             .Description("Get room by id.");
     }

@@ -1,0 +1,7 @@
+<div *ngIf="room$ | async as room; else loading">
+    <p>{{ room.id }}</p>
+    <p>{{ room.name }}</p>
+    <a routerLink="/">Back</a>
+</div>
+
+<ng-template #loading>Loading...</ng-template>
