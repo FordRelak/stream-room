@@ -6,10 +6,12 @@ public class UserType : ObjectType<User>
     {
         descriptor
             .Field(type => type.Id)
+            .Type<UuidType>()
             .Description("User Id.");
 
         descriptor
             .Field(type => type.Name)
+            .Type<StringType>()
             .Description("User name.");
     }
 }

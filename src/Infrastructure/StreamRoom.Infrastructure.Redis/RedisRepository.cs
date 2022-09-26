@@ -35,10 +35,28 @@ public abstract class RedisRepository<T> : IRepository<T> where T : Base
             }, TaskContinuationOptions.OnlyOnRanToCompletion);
     }
 
+    public Task<IReadOnlyList<T>> GetAsync(Guid[] ids)
+    {
+        return _database.HashGetAsync(HashName, Array.ConvertAll(ids, id => new RedisValue(id.ToString())))
+            .ContinueWith(task =>
+            {
+                return task.Result.Any()
+                    ? Array.ConvertAll(task.Result, value => JsonSerializer.Deserialize<T>(value!, _jsonSerializerOptions)) as IReadOnlyList<T>
+                    : Array.Empty<T>();
+            }, TaskContinuationOptions.OnlyOnRanToCompletion);
+    }
+
     public Task<bool> InsertAsync(T value)
     {
         value.Id = Guid.NewGuid();
 
+        var serializedValue = JsonSerializer.Serialize(value, _jsonSerializerOptions);
+
+        return _database.HashSetAsync(HashName, value.Id.ToString(), serializedValue);
+    }
+
+    public Task<bool> UpdateAsync(T value)
+    {
         var serializedValue = JsonSerializer.Serialize(value, _jsonSerializerOptions);
 
         return _database.HashSetAsync(HashName, value.Id.ToString(), serializedValue);
@@ -49,9 +67,9 @@ public abstract class RedisRepository<T> : IRepository<T> where T : Base
         return _database.HashGetAllAsync(HashName)
             .ContinueWith(task =>
             {
-                return !task.Result.Any()
-                    ? Array.Empty<T>()
-                    : Array.ConvertAll(task.Result, value => JsonSerializer.Deserialize<T>(value.Value!, _jsonSerializerOptions)) as IReadOnlyList<T>;
+                return task.Result.Any()
+                    ? Array.ConvertAll(task.Result, value => JsonSerializer.Deserialize<T>(value.Value!, _jsonSerializerOptions)) as IReadOnlyList<T>
+                    : Array.Empty<T>();
             }, TaskContinuationOptions.OnlyOnRanToCompletion);
     }
 }

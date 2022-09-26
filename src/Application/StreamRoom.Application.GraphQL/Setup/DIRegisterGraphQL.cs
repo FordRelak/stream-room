@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using StreamRoom.Application.GraphQL.Mutations.AddRoom;
 using StreamRoom.Application.GraphQL.Mutations.AddUser;
+using StreamRoom.Application.GraphQL.Mutations.AddUserToRoom;
 using StreamRoom.Application.GraphQL.Queries.Rooms;
 using StreamRoom.Application.GraphQL.Queries.Users;
 
@@ -17,6 +18,7 @@ public static class DIRegisterGraphQL
             .AddType<UserType>()
             .AddType<AddRoomInputType>()
             .AddType<AddUserInputType>()
+            .AddType<AddUserToRoomInputType>()
 
             .AddQueryType<Query>()
             .AddTypeExtension<GetRoomsQuery>()
@@ -27,6 +29,7 @@ public static class DIRegisterGraphQL
             .AddMutationType<Mutation>()
             .AddTypeExtension<AddRoomMutation>()
             .AddTypeExtension<AddUserMutation>()
+            .AddTypeExtension<AddUserToRoomMutation>()
             ;
 
         return services;
