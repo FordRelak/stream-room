@@ -2,6 +2,7 @@
 using StreamRoom.Application.GraphQL.Mutations.AddRoom;
 using StreamRoom.Application.GraphQL.Mutations.AddUser;
 using StreamRoom.Application.GraphQL.Mutations.AddUserToRoom;
+using StreamRoom.Application.GraphQL.Mutations.RemoveUserFromRoom;
 using StreamRoom.Application.GraphQL.Queries.Rooms;
 using StreamRoom.Application.GraphQL.Queries.Users;
 
@@ -19,6 +20,7 @@ public static class DIRegisterGraphQL
             .AddType<AddRoomInputType>()
             .AddType<AddUserInputType>()
             .AddType<AddUserToRoomInputType>()
+            .AddType<RemoveUserFromRoomInputType>()
 
             .AddQueryType<Query>()
             .AddTypeExtension<GetRoomsQuery>()
@@ -30,6 +32,7 @@ public static class DIRegisterGraphQL
             .AddTypeExtension<AddRoomMutation>()
             .AddTypeExtension<AddUserMutation>()
             .AddTypeExtension<AddUserToRoomMutation>()
+            .AddTypeExtension<RemoveUserFromRoomMutation>()
             ;
 
         return services;
