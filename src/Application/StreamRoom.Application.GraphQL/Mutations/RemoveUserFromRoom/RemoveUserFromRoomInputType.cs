@@ -1,4 +1,5 @@
 ﻿namespace StreamRoom.Application.GraphQL.Mutations.RemoveUserFromRoom;
+
 public class RemoveUserFromRoomInputType : InputObjectType<RemoveUserFromRoomInput>
 {
     protected override void Configure(IInputObjectTypeDescriptor<RemoveUserFromRoomInput> descriptor)

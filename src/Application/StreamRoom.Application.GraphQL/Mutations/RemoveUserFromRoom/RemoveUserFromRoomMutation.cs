@@ -1,4 +1,5 @@
 ﻿namespace StreamRoom.Application.GraphQL.Mutations.RemoveUserFromRoom;
+
 public class RemoveUserFromRoomMutation : ObjectType<Mutation>
 {
     protected override void Configure(IObjectTypeDescriptor<Mutation> descriptor)

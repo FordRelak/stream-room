@@ -2,4 +2,5 @@
 
 public abstract class Payload
 {
+    public bool IsSuccess { get; set; } = true;
 }
