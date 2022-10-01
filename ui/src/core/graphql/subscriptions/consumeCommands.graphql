@@ -1,0 +1,7 @@
+subscription ConsumeRoomCommands($roomId: UUID!) {
+    consumeRoomCommands(roomId: $roomId) {
+        commandType
+        roomId
+        userId
+    }
+}

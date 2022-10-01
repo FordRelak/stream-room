@@ -1,0 +1,5 @@
+mutation RemoveUserFromRoom($roomId: UUID!, $userId: UUID!) {
+    removeUserFromRoom(input: { roomId: $roomId, userId: $userId }) {
+        isSuccess
+    }
+}
