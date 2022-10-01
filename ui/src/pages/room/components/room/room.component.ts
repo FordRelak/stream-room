@@ -3,8 +3,8 @@ import { Observable, of, switchMap, takeUntil } from 'rxjs';
 
 import { Component } from '@angular/core';
 import { DestroyableComponent } from '@shared/components/destroyable/destroyable.component';
-import Room from '@core/models/room';
 import { RoomService } from '@shared/services/room.service';
+import { Room } from '@core/models';
 
 @Component({
     selector: 'app-room',

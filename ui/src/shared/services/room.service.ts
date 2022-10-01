@@ -9,7 +9,7 @@ import {
 import { GraphQLApi } from '@core/graphql/graphql-api';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import Room from '@core/models/room';
+import { Room } from '@core/models';
 
 @Injectable({
     providedIn: 'root',
