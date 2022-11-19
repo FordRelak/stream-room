@@ -688,3 +688,4 @@ dist
 .svelte-kit
 /stream-room-schemas.drawio
 /src/StreamRoom.WebApi/appsettings.Development.json
+/ui/graphql.schema.json

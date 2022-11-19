@@ -1,5 +1,7 @@
-import Base from './base';
+import { Base } from './base';
 
-export default interface Room extends Base {
+export interface Room extends Base {
     name: string;
+    userIds: string[];
+    src?: string;
 }

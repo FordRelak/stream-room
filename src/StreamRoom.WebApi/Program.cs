@@ -6,10 +6,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.RegisterRedis(builder.Configuration);
 builder.Services.RegisterJsonOptions();
-builder.Services.RegisterGraphQL();
 builder.Services.AddCors();
 
-builder.Services.AddGraphQLServer();
+builder.Services.AddGraphQLServer()
+                .RegisterGraphQL();
 
 var app = builder.Build();
 
@@ -22,6 +22,8 @@ app.UseCors(policy =>
 });
 
 app.UseRouting();
+
+app.UseWebSockets();
 
 app.UseEndpoints(endpoints =>
 {

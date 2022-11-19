@@ -5,4 +5,5 @@ import { IEnvironment } from './ienvironment';
 export const environment: IEnvironment = {
     production: true,
     graphqlUri: '/graphql',
+    wsUri: '/graphql',
 };

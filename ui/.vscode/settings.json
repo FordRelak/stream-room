@@ -12,5 +12,11 @@
     "prettier.singleAttributePerLine": true,
     "prettier.singleQuote": true,
     "prettier.endOfLine": "crlf",
-    "files.eol": "\r\n"
+    "files.eol": "\r\n",
+    "gitlens.autolinks": [
+        {
+            "prefix": "#",
+            "url": "https://github.com/FordRelak/stream-room/issues/<num>"
+        }
+    ]
 }
