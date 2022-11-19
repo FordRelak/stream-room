@@ -1,0 +1,11 @@
+mutation SendCommand(
+    $roomId: UUID!
+    $userId: UUID!
+    $commandType: CommandTypeEnum!
+) {
+    sendCommand(
+        input: { commandType: $commandType, roomId: $roomId, userId: $userId }
+    ) {
+        isSuccess
+    }
+}

@@ -4,4 +4,15 @@
     <a routerLink="/">Back</a>
 </div>
 
+<div *ngIf="commands$ | async as commands; else loadingCommands">
+    <p>{{ commands.commandType }}</p>
+    <p>{{ commands.roomId }}</p>
+    <p>{{ commands.userId }}</p>
+</div>
+
+<div>
+    <button type="button" (click)="send()">Send</button>
+</div>
+
 <ng-template #loading>Loading...</ng-template>
+<ng-template #loadingCommands>Loading commands...</ng-template>
