@@ -1,5 +1,5 @@
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Observable, of, switchMap, takeUntil } from 'rxjs';
+import { Observable, of, switchMap, takeUntil, tap, ReplaySubject } from 'rxjs';
 
 import { Component } from '@angular/core';
 import { DestroyableComponent } from '@shared/components/destroyable/destroyable.component';
@@ -16,6 +16,7 @@ export class RoomComponent extends DestroyableComponent {
     public readonly room$: Observable<Room>;
     public readonly commands$: Observable<Command>;
 
+    private readonly _commands$: ReplaySubject<Command>;
     constructor(
         private readonly _route: ActivatedRoute,
         private readonly _roomGraphQlService: RoomGraphQlService,
@@ -23,16 +24,18 @@ export class RoomComponent extends DestroyableComponent {
     ) {
         super();
 
+        this._commands$ = new ReplaySubject<Command>();
+        this.commands$ = this._commands$.asObservable();
+
         this.room$ = _route.paramMap.pipe(
             switchMap((parameters: ParamMap) =>
                 of(<string>parameters.get('id'))
             ),
             switchMap((id) => _roomGraphQlService.getRoom(id)),
+            tap((room) => {
+                this._handleSubscription(room);
+            }),
             takeUntil(this._alive$)
-        );
-
-        this.commands$ = _roomService.consumeCommand(
-            'ea15f2e2-3f8b-4dab-b422-6c00c144b5d5'
         );
     }
 
@@ -40,6 +43,16 @@ export class RoomComponent extends DestroyableComponent {
         this._roomService
             .sendCommand(CommandTypeEnum.Pause)
             .pipe(takeUntil(this._alive$))
+            .subscribe();
+    }
+
+    private _handleSubscription(room: Room) {
+        this._roomService
+            .consumeCommand(room.id)
+            .pipe(
+                tap((command) => this._commands$.next(command)),
+                takeUntil(this._alive$)
+            )
             .subscribe();
     }
 }

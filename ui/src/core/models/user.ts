@@ -1,5 +1,5 @@
-import { Base } from './base';
+import { EnitityBase } from './base';
 
-export interface User extends Base {
+export interface User extends EnitityBase {
     name: string;
 }
