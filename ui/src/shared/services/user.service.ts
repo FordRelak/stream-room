@@ -1,3 +1,4 @@
+import { EnitityBase } from './../../core/models/base';
 import { Observable, ReplaySubject, take, tap } from 'rxjs';
 
 import { Injectable } from '@angular/core';
@@ -14,11 +15,6 @@ export class UserService {
     constructor() {
         this._user$ = new ReplaySubject<User>();
         this.user$ = this._user$.asObservable();
-
-        this._user$.next({
-            id: '33e2976f-5fcc-40f9-ad32-81dbcb59b0c8',
-            name: '321',
-        });
     }
 
     public setUser(user: User): void {
@@ -34,13 +30,19 @@ export class UserService {
             throw new Error('newName is null');
         }
 
+        this._updateUser({ name: newName });
+    }
+
+    private _updateUser(
+        newUserData: Omit<Partial<User>, keyof EnitityBase>
+    ): void {
         this._user$
             .pipe(
                 take(1),
                 tap((user) => {
                     const newUser = <User>{
                         ...user,
-                        name: newName,
+                        ...newUserData,
                     };
 
                     this._user$.next(newUser);
