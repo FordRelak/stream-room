@@ -2,12 +2,13 @@ import { Apollo, TypedDocumentNode } from 'apollo-angular';
 import { Observable, map } from 'rxjs';
 
 import { Injectable } from '@angular/core';
-import { EmptyObject, MutationOptions } from 'apollo-angular/types';
 import {
     DocumentNode,
+    MutationOptions,
     QueryOptions,
     SubscriptionOptions,
 } from '@apollo/client/core';
+import { EmptyObject } from 'apollo-angular/build/types';
 
 @Injectable({
     providedIn: 'root',
