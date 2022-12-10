@@ -1,3 +1,4 @@
+import { RoomGraphQlService } from '@core/services/room-graphql.service';
 import { Command, CommandTypeEnum, Room } from '@core/models';
 import {
     Observable,
@@ -23,29 +24,50 @@ export class RoomService {
 
     constructor(
         private readonly _userService: UserService,
-        private readonly _commandGraphQLService: CommandGraphQlService
+        private readonly _commandGraphQLService: CommandGraphQlService,
+        private readonly _roomGraphQlService: RoomGraphQlService
     ) {
         this._room$ = new ReplaySubject<Room>();
         this.room$ = this._room$.asObservable();
-
-        this._room$.next({
-            id: 'ea15f2e2-3f8b-4dab-b422-6c00c144b5d5',
-            name: '321',
-            userIds: [],
-        });
     }
 
-    public consumeCommand(roomId: string): Observable<Command> {
-        return this._commandGraphQLService.consumeCommands(roomId).pipe(
+    public createRoom(roomName: string): Observable<Room> {
+        return this._roomGraphQlService.createRoom(roomName).pipe(
+            map((roomId) => {
+                const newRoom = <Room>{
+                    id: roomId,
+                    name: roomName,
+                };
+
+                this._room$.next(newRoom);
+
+                return newRoom;
+            })
+        );
+    }
+
+    public getRoom(id: string): Observable<Room> {
+        return this._roomGraphQlService.getRoom(id);
+    }
+
+    public joinRoom(room: Room): void {
+        this._room$.next(room);
+    }
+
+    public consumeCommand(): Observable<Command> {
+        return combineLatest([this.room$]).pipe(
+            switchMap(([room]) => {
+                return this._commandGraphQLService.consumeCommands(room.id);
+            }),
             withLatestFrom(this._userService.user$),
             filter(([, user]) => !!user),
-            //filter(([command, user]) => command.userId !== user.id),
+            //filter(([command, user]) => command.userId !== user.id), todo
             map(([command]) => command)
         );
     }
 
     public sendCommand(command: CommandTypeEnum): Observable<boolean> {
-        return combineLatest([this._userService.user$, this._room$]).pipe(
+        return combineLatest([this._userService.user$, this.room$]).pipe(
             filter(([user, room]) => !!user && !!room),
             switchMap(([user, room]) =>
                 this._commandGraphQLService.sendCommand(

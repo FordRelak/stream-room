@@ -1,4 +1,9 @@
 import {
+    CreateRoomMutation,
+    CreateRoomMutationVariables,
+    CreateRoomDocument,
+} from './../graphql/generated/graphql';
+import {
     RoomDocument,
     RoomQueryVariables,
     RoomQuery,
@@ -35,5 +40,20 @@ export class RoomGraphQlService {
         return this._graphQL
             .get<RoomQuery, RoomQueryVariables>(RoomDocument, variables)
             .pipe(map((result) => <Room>result.roomById));
+    }
+
+    public createRoom(roomName: string): Observable<string> {
+        if (!roomName) {
+            throw new Error('roomName is null or empty.');
+        }
+
+        return this._graphQL
+            .mutate<CreateRoomMutation, CreateRoomMutationVariables>(
+                CreateRoomDocument,
+                {
+                    name: roomName,
+                }
+            )
+            .pipe(map((createRoomMutation) => createRoomMutation.addRoom.id));
     }
 }

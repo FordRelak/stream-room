@@ -3,7 +3,6 @@ import { Observable, of, switchMap, takeUntil, tap, ReplaySubject } from 'rxjs';
 
 import { Component } from '@angular/core';
 import { DestroyableComponent } from '@shared/components/destroyable/destroyable.component';
-import { RoomGraphQlService } from '@core/services/room-graphql.service';
 import { Command, CommandTypeEnum, Room } from '@core/models';
 import { RoomService } from '@shared/services';
 
@@ -19,7 +18,6 @@ export class RoomComponent extends DestroyableComponent {
     private readonly _commands$: ReplaySubject<Command>;
     constructor(
         private readonly _route: ActivatedRoute,
-        private readonly _roomGraphQlService: RoomGraphQlService,
         private readonly _roomService: RoomService
     ) {
         super();
@@ -31,9 +29,10 @@ export class RoomComponent extends DestroyableComponent {
             switchMap((parameters: ParamMap) =>
                 of(<string>parameters.get('id'))
             ),
-            switchMap((id) => _roomGraphQlService.getRoom(id)),
+            switchMap((id) => _roomService.getRoom(id)),
             tap((room) => {
-                this._handleSubscription(room);
+                this._roomService.joinRoom(room);
+                this._handleSubscription();
             }),
             takeUntil(this._alive$)
         );
@@ -46,9 +45,9 @@ export class RoomComponent extends DestroyableComponent {
             .subscribe();
     }
 
-    private _handleSubscription(room: Room) {
+    private _handleSubscription() {
         this._roomService
-            .consumeCommand(room.id)
+            .consumeCommand()
             .pipe(
                 tap((command) => this._commands$.next(command)),
                 takeUntil(this._alive$)
