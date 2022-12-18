@@ -5,13 +5,14 @@ using StreamRoom.Application.GraphQL.Mutations.AddUser;
 using StreamRoom.Application.GraphQL.Mutations.AddUserToRoom;
 using StreamRoom.Application.GraphQL.Mutations.RemoveUserFromRoom;
 using StreamRoom.Application.GraphQL.Mutations.SendCommand;
+using StreamRoom.Application.GraphQL.Mutations.UpdateUser;
 using StreamRoom.Application.GraphQL.Queries.Rooms;
 using StreamRoom.Application.GraphQL.Queries.Users;
 using StreamRoom.Application.GraphQL.Subscriptions.Command;
 
 namespace StreamRoom.Application.GraphQL.Setup;
 
-public static class DIRegisterGraphQL
+public static class GraphQLRequestExecutorBuilderExtension
 {
     public static IRequestExecutorBuilder RegisterGraphQL(this IRequestExecutorBuilder services)
     {
@@ -36,11 +37,14 @@ public static class DIRegisterGraphQL
             .AddTypeExtension<AddUserToRoomMutation>()
             .AddTypeExtension<RemoveUserFromRoomMutation>()
             .AddTypeExtension<SendCommandMutation>()
+            .AddTypeExtension<UpdateUserMutation>()
 
             .AddSubscriptionType<Subscription>()
             .AddTypeExtension<ConsumeRoomCommandsSubscription>()
 
             .AddInMemorySubscriptions()
+
+            .RegisterValidationGraphQLInputs()
         ;
 
         return services;

@@ -2,6 +2,12 @@ import {
     CreateRoomMutation,
     CreateRoomMutationVariables,
     CreateRoomDocument,
+    RemoveUserFromRoomDocument,
+    RemoveUserFromRoomMutationVariables,
+    RemoveUserFromRoomMutation,
+    AddUserToRoomMutationVariables,
+    AddUserToRoomMutation,
+    AddUserToRoomDocument,
 } from './../graphql/generated/graphql';
 import {
     RoomDocument,
@@ -55,5 +61,52 @@ export class RoomGraphQlService {
                 }
             )
             .pipe(map((createRoomMutation) => createRoomMutation.addRoom.id));
+    }
+
+    public addUserToRoom(roomId: string, userId: string): Observable<boolean> {
+        if (!roomId) {
+            throw new Error('roomId is null');
+        }
+
+        if (!userId) {
+            throw new Error('userId is null');
+        }
+
+        return this._graphQL
+            .mutate<AddUserToRoomMutation, AddUserToRoomMutationVariables>(
+                AddUserToRoomDocument,
+                { roomId, userId }
+            )
+            .pipe(
+                map(
+                    (addUserToRoomResult) =>
+                        addUserToRoomResult.addUserToRoom.isSuccess
+                )
+            );
+    }
+
+    public removeUserFromRoom(
+        roomId: string,
+        userId: string
+    ): Observable<boolean> {
+        if (!roomId) {
+            throw new Error('roomId is null');
+        }
+
+        if (!userId) {
+            throw new Error('userId is null');
+        }
+
+        return this._graphQL
+            .mutate<
+                RemoveUserFromRoomMutation,
+                RemoveUserFromRoomMutationVariables
+            >(RemoveUserFromRoomDocument, { roomId, userId })
+            .pipe(
+                map(
+                    (removeUserFromRoomResult) =>
+                        removeUserFromRoomResult.removeUserFromRoom.isSuccess
+                )
+            );
     }
 }

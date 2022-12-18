@@ -8,6 +8,9 @@ import {
     map,
     switchMap,
     withLatestFrom,
+    forkJoin,
+    throwError,
+    of,
 } from 'rxjs';
 
 import { CommandGraphQlService } from '@core/services';
@@ -50,15 +53,39 @@ export class RoomService {
         return this._roomGraphQlService.getRoom(id);
     }
 
-    public joinRoom(room: Room): void {
-        this._room$.next(room);
+    public joinRoom(roomId: string): Observable<boolean> {
+        return this._userService.user$.pipe(
+            switchMap((user) =>
+                this._roomGraphQlService.addUserToRoom(roomId, user.id)
+            ),
+            switchMap((isJoined) => {
+                if (!isJoined) {
+                    throwError(() => new Error('Error when joined room'));
+                }
+
+                return forkJoin([of(isJoined), this.getRoom(roomId)]);
+            }),
+            map(([isJoined, room]) => {
+                this._room$.next(room);
+
+                return isJoined;
+            })
+        );
+    }
+
+    public leaveRoom(): Observable<boolean> {
+        return forkJoin([this.room$, this._userService.user$]).pipe(
+            switchMap(([room, user]) =>
+                this._roomGraphQlService.removeUserFromRoom(room.id, user.id)
+            )
+        );
     }
 
     public consumeCommand(): Observable<Command> {
-        return combineLatest([this.room$]).pipe(
-            switchMap(([room]) => {
-                return this._commandGraphQLService.consumeCommands(room.id);
-            }),
+        return this.room$.pipe(
+            switchMap((room) =>
+                this._commandGraphQLService.consumeCommands(room.id)
+            ),
             withLatestFrom(this._userService.user$),
             filter(([, user]) => !!user),
             //filter(([command, user]) => command.userId !== user.id), todo

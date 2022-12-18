@@ -1,5 +1,6 @@
-import { EnitityBase } from './../../core/models/base';
-import { Observable, ReplaySubject, take, tap } from 'rxjs';
+import { UserGraphQlService } from '@core/services';
+import { EnitityBase } from '@core/models/base';
+import { Observable, ReplaySubject, take, tap, map } from 'rxjs';
 
 import { Injectable } from '@angular/core';
 import { User } from '@core/models';
@@ -12,7 +13,7 @@ export class UserService {
 
     private readonly _user$: ReplaySubject<User>;
 
-    constructor() {
+    constructor(private readonly _userGraphQLService: UserGraphQlService) {
         this._user$ = new ReplaySubject<User>();
         this.user$ = this._user$.asObservable();
     }
@@ -23,6 +24,21 @@ export class UserService {
         }
 
         this._user$.next(user);
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-dupe-class-members
+    public setUser(nickname: string): Observable<void> {
+        return this._userGraphQLService.createUser(nickname).pipe(
+            tap((userId) => {
+                this._user$.next({
+                    id: userId,
+                    name: nickname,
+                });
+            }),
+            map(() => {
+                return;
+            })
+        );
     }
 
     public setName(newName: string): void {
