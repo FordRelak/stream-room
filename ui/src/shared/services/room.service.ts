@@ -53,6 +53,10 @@ export class RoomService {
         return this._roomGraphQlService.getRoom(id);
     }
 
+    public getRooms(): Observable<Room[]> {
+        return this._roomGraphQlService.getRooms();
+    }
+
     public joinRoom(roomId: string): Observable<boolean> {
         return this._userService.user$.pipe(
             switchMap((user) =>
