@@ -24,6 +24,7 @@ public static class GraphQLRequestExecutorBuilderExtension
             .AddType<AddUserToRoomInputType>()
             .AddType<RemoveUserFromRoomInputType>()
             .AddType<SendCommandInputType>()
+            .AddType<UpdateUserInputType>()
 
             .AddQueryType<Query>()
             .AddTypeExtension<GetRoomsQuery>()

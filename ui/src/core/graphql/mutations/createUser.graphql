@@ -1,5 +1,0 @@
-mutation CreateUser($name: String!) {
-    addUser(input: { name: $name }) {
-        id
-    }
-}

@@ -1,6 +1,0 @@
-mutation AddUserToRoom($roomId: UUID!, $userId: UUID!) {
-    addUserToRoom(input: { roomId: $roomId, userId: $userId }) {
-        roomId
-        isSuccess
-    }
-}

@@ -1,6 +1,14 @@
 {
     "configurations": [
         {
+            "name": "Attach to Chrome",
+            "port": 9250,
+            "request": "attach",
+            "type": "chrome",
+            "urlFilter": "http://localhost:4200/*",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
             "name": "Launch Chrome",
             "request": "launch",
             "type": "chrome",

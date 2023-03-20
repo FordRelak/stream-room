@@ -1,6 +1,6 @@
 ﻿namespace StreamRoom.Domain;
 
-public partial class Room : Base
+public class Room : Base
 {
     public string Name { get; set; } = string.Empty;
 
