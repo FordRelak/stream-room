@@ -10,8 +10,8 @@ import { Observable, tap } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { ROOM_STATE_TOKEN } from './room-state.token';
 import { Room } from '@shared/types';
-import { RoomActions } from './room.actions';
-import { RoomApi } from '@shared/api';
+import { RoomActions } from './room-state.actions';
+import { RoomApi } from '@shared/api/room';
 import { RoomStateModel } from './room-state.model';
 
 const roomStateModelDefaults: RoomStateModel = {

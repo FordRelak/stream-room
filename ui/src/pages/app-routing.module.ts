@@ -1,7 +1,7 @@
 import { RouterModule, Routes } from '@angular/router';
 
 import { NgModule } from '@angular/core';
-import { RoomListComponent } from './room-list';
+import { StartupComponent } from './startup';
 
 enum PageRoutesEnum {
     Rooms = 'rooms',
@@ -10,12 +10,14 @@ enum PageRoutesEnum {
 const routes: Routes = [
     {
         path: PageRoutesEnum.Rooms,
-        component: RoomListComponent,
+        loadChildren: () =>
+            import('./room-list/room-list-page.module').then(
+                (m) => m.RoomListPageModule
+            ),
     },
     {
         path: '',
-        redirectTo: PageRoutesEnum.Rooms,
-        pathMatch: 'full',
+        component: StartupComponent,
     },
 ];
 
