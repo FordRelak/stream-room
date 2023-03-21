@@ -1,0 +1,5 @@
+<div class="room-list" *ngIf="rooms$ | async as rooms">
+    <div *ngFor="let room of rooms" class="room-list-item">
+        <app-room-card [room]="room"></app-room-card>
+    </div>
+</div>

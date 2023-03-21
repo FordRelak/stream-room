@@ -1,0 +1,13 @@
+<ng-container *ngIf="room">
+    <div class="room">
+        <p>Id комнаты - {{ room.id }}</p>
+
+        <p>Название компанты - {{ room.name }}</p>
+
+        <ul *ngIf="room.userIds?.length">
+            <li *ngFor="let userId of room.userIds">
+                Id Пользователя - {{ userId }}
+            </li>
+        </ul>
+    </div>
+</ng-container>

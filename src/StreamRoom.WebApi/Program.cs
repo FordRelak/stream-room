@@ -11,6 +11,8 @@ builder.Services.AddCors();
 builder.Services.AddGraphQLServer()
                 .RegisterGraphQL();
 
+builder.Services.RegisterValidation();
+
 var app = builder.Build();
 
 app.UseCors(policy =>
@@ -25,9 +27,6 @@ app.UseRouting();
 
 app.UseWebSockets();
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapGraphQL();
-});
+app.MapGraphQL();
 
 app.Run();

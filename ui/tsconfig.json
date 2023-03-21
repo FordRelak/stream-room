@@ -19,9 +19,10 @@
         "module": "es2020",
         "lib": ["es2020", "dom"],
         "paths": {
+            "@pages/*": ["src/pages/*"],
+            "@entities/*": ["src/entities/*"],
             "@shared/*": ["src/shared/*"],
-            "@core/*": ["src/core/*"],
-            "@graphql/*": ["src/core/graphql/*"]
+            "@env/*": ["src/environments/*"]
         },
         "allowSyntheticDefaultImports": true,
         "useDefineForClassFields": false

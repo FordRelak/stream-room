@@ -43,3 +43,4 @@ Thumbs.db
 
 src/core/graphql/generated/graphql.ts
 graphql.schema.json
+src/shared/graphql.generated.ts

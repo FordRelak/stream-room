@@ -2,13 +2,13 @@
 
 public static class StringExtension
 {
-    private static readonly string[] endingsOfWords = { "Async", "Mutation", "Query", "Subscription" };
+    private static readonly string[] _endingsOfWords = { "Async", "Mutation", "Query", "Subscription", "ById" };
 
     public static string ToGqlName(this string name)
     {
         var newName = name.TrimStart("Get");
 
-        newName = endingsOfWords.Aggregate(newName, (current, word) => current.TrimEnd(word));
+        newName = _endingsOfWords.Aggregate(newName, (current, word) => current.TrimEnd(word));
 
         return newName?.FirstCharToLowerCase() ?? throw new ArgumentNullException($"{name} - После удаления пустая.");
     }

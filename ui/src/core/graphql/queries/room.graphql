@@ -1,7 +1,0 @@
-query Room($id: ID!) {
-    roomById(id: $id) {
-        id
-        name
-        src
-    }
-}

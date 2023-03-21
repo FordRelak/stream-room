@@ -1,4 +1,6 @@
-﻿namespace StreamRoom.Application.GraphQL.Mutations.AddUser;
+﻿using AppAny.HotChocolate.FluentValidation;
+
+namespace StreamRoom.Application.GraphQL.Mutations.AddUser;
 
 public class AddUserMutation : ObjectTypeExtension<Mutation>
 {
@@ -6,7 +8,7 @@ public class AddUserMutation : ObjectTypeExtension<Mutation>
     {
         descriptor
             .Field(nameof(AddUserMutation).ToGqlName())
-            .Argument("input", argument => argument.Type<NonNullType<AddUserInputType>>())
+            .Argument("input", argument => argument.Type<NonNullType<AddUserInputType>>().UseFluentValidation())
             .ResolveWith<AddUserRevolver>(resolver => resolver.AddUserAsync(default!, default!))
             .Description("Add user.");
     }

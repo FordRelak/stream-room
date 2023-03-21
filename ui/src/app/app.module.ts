@@ -1,25 +1,27 @@
-import { AppComponent } from './components/app/app.component';
-import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from '@pages/app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { ENVIRONMENT } from 'src/core/services/environment.service';
-import { GraphQLModule } from '@core/graphql/graphql.module';
+import { ENVIRONMENT_TOKEN } from '@shared/lib';
+import { GraphQLModule } from './graph-ql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { StoreModule } from './store.module';
+import { environment } from '@env/environment';
 
 @NgModule({
     declarations: [AppComponent],
     imports: [
         BrowserModule,
-        AppRoutingModule,
         BrowserAnimationsModule,
+        AppRoutingModule,
+        StoreModule,
         GraphQLModule,
         HttpClientModule,
     ],
     providers: [
         {
-            provide: ENVIRONMENT,
+            provide: ENVIRONMENT_TOKEN,
             useValue: environment,
         },
     ],
