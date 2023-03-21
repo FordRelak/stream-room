@@ -42,4 +42,4 @@ testem.log
 Thumbs.db
 
 graphql.schema.json
-src/shared/graphql.generated.ts
+src/shared/graphql.ts

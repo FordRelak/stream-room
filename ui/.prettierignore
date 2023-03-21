@@ -44,4 +44,4 @@ Thumbs.db
 package-lock.json
 
 graphql.schema.json
-src/shared/graphql.generated.ts
+src/shared/graphql.ts

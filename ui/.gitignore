@@ -42,5 +42,4 @@ testem.log
 Thumbs.db
 
 /.husky
-src/shared/graphql.generated.ts
 graphql.schema.json

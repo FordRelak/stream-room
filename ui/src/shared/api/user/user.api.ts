@@ -10,7 +10,7 @@ import {
     UserDocument,
     UserQuery,
     UserQueryVariables,
-} from '@shared/graphql.generated';
+} from '@shared/graphql';
 
 @Injectable({
     providedIn: 'root',
