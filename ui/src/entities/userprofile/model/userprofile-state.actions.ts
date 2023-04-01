@@ -6,6 +6,5 @@ export namespace UserProfileActions {
 
     export class FetchProfile {
         static readonly type = '[User Profile] Fetch Profile';
-        constructor(public userId: string) {}
     }
 }

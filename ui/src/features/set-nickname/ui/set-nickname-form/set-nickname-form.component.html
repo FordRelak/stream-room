@@ -11,5 +11,12 @@
             {{ getErrorMessage() }}
         </mat-error>
     </mat-form-field>
-    <button mat-raised-button color="primary">Primary</button>
+    <button
+        type="button"
+        mat-raised-button
+        color="primary"
+        [disabled]="nicknameFormControl.invalid"
+        (click)="setNickname()">
+        Set nickname
+    </button>
 </form>

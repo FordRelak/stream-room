@@ -1,4 +1,4 @@
-import { map, Observable } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import {
     Action,
     Selector,
@@ -11,8 +11,7 @@ import { Injectable } from '@angular/core';
 import { USER_PROFILE_STATE_TOKEN } from './userprofile-state.token';
 import { UserProfileStateModel } from './userprofile-state.model';
 import { UserProfileActions } from './userprofile-state.actions';
-import { UserApi } from '@shared/api/user';
-import { User } from '@shared/types';
+import { CreateUser, UpdateUser, UserApi } from '@shared/api/user';
 
 const userProfileStateModelDefault: UserProfileStateModel = {
     id: '',
@@ -40,15 +39,27 @@ export class UserProfileState {
     ): Observable<void> {
         const state = context.getState();
 
-        const updateUser = <User>{
-            ...state,
-            name: nickname,
-        };
+        if (state.id) {
+            return this._updateUserNickname(state.id, nickname, context);
+        }
 
-        return this._userApi.update(updateUser).pipe(
-            map(() => {
-                context.patchState({
-                    nickname,
+        return this._createUserWithNickname(nickname, context);
+    }
+
+    @Action(UserProfileActions.FetchProfile)
+    public fetchProfile(
+        context: StateContext<UserProfileStateModel>
+    ): Observable<void> {
+        const state = context.getState();
+
+        if (!state.id) {
+            return of();
+        }
+
+        return this._userApi.get(state.id).pipe(
+            map((user) => {
+                context.setState({
+                    ...user,
                 });
             })
         );
@@ -62,5 +73,42 @@ export class UserProfileState {
     @Selector([USER_PROFILE_STATE_TOKEN])
     static isProfileSet(state: UserProfileStateModel): boolean {
         return !!state.id;
+    }
+
+    private _createUserWithNickname(
+        nickname: string,
+        context: StateContext<UserProfileStateModel>
+    ) {
+        const newUser = <CreateUser>{
+            nickname,
+        };
+
+        return this._userApi.create(newUser).pipe(
+            map((userId) => {
+                context.setState({
+                    id: userId,
+                    nickname: nickname,
+                });
+            })
+        );
+    }
+
+    private _updateUserNickname(
+        userId: string,
+        newNickname: string,
+        context: StateContext<UserProfileStateModel>
+    ) {
+        const updateUser = <UpdateUser>{
+            id: userId,
+            nickname: newNickname,
+        };
+
+        return this._userApi.update(updateUser).pipe(
+            map(() => {
+                context.patchState({
+                    nickname: newNickname,
+                });
+            })
+        );
     }
 }

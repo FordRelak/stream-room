@@ -1,0 +1,13 @@
+@import 'mixins/sizes';
+@import 'mixins/flex';
+
+.startup {
+    @include fill-100;
+    @include flex-center;
+
+    &-set-nickname-form {
+        max-width: 400px;
+        width: 100%;
+        margin: 0 50px;
+    }
+}

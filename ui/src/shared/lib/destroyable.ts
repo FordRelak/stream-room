@@ -1,13 +1,15 @@
 import { Injectable, OnDestroy } from '@angular/core';
 
-import { Subject } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
 
 @Injectable()
 export class Destroyable implements OnDestroy {
-    protected readonly alive$: Subject<void> = new Subject<void>();
+    protected readonly destroy$: ReplaySubject<void> = new ReplaySubject<void>(
+        1
+    );
 
     ngOnDestroy(): void {
-        this.alive$.next();
-        this.alive$.complete();
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 }

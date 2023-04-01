@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import { GraphQLApi } from '../graphql.api';
 import { User } from '@shared/types';
 import {
+    CreateUserDocument,
+    CreateUserMutation,
+    CreateUserMutationVariables,
     UpdateUserDocument,
     UpdateUserInput,
     UpdateUserMutation,
@@ -11,6 +14,7 @@ import {
     UserQuery,
     UserQueryVariables,
 } from '@shared/graphql';
+import { CreateUser, UpdateUser } from './models';
 
 @Injectable({
     providedIn: 'root',
@@ -26,7 +30,25 @@ export class UserApi {
             .pipe(map((userQuery) => <User>userQuery.user));
     }
 
-    public update(user: User): Observable<string> {
+    public create(newUser: CreateUser): Observable<string> {
+        return this._api
+            .mutate<CreateUserMutation, CreateUserMutationVariables>(
+                CreateUserDocument,
+                {
+                    user: {
+                        nickname: newUser.nickname,
+                    },
+                }
+            )
+            .pipe(
+                map(
+                    (createUserDocument) =>
+                        <string>createUserDocument.addUser.id
+                )
+            );
+    }
+
+    public update(user: UpdateUser): Observable<string> {
         return this._api
             .mutate<UpdateUserMutation, UpdateUserMutationVariables>(
                 UpdateUserDocument,

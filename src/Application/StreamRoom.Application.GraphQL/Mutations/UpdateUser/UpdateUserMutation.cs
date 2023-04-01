@@ -21,7 +21,7 @@ public class UpdateUserMutation : ObjectTypeExtension<Mutation>
 
             _ = user ?? throw new GraphQLException($"User with id = '{updateUserInput.Id}' not found.");
 
-            user.Name = updateUserInput.Name;
+            user.Nickname = updateUserInput.Nickname;
 
             await userRepository.UpdateAsync(user);
 

@@ -1,0 +1,7 @@
+@import 'mixins/flex';
+
+.set-nickname-form {
+    @include flex-column;
+
+    row-gap: 20px;
+}

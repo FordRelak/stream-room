@@ -1,14 +1,8 @@
-import {
-    Actions,
-    Select,
-    Store,
-    ofActionDispatched,
-    ofActionSuccessful,
-} from '@ngxs/store';
-import { BehaviorSubject, Observable, takeUntil } from 'rxjs';
+import { Actions, Select, Store } from '@ngxs/store';
+import { BehaviorSubject, Observable } from 'rxjs';
 
-import { Destroyable } from '@shared/lib/destroyable';
 import { Injectable } from '@angular/core';
+import { NgXsActionable } from '@shared/lib';
 import { Room } from '@shared/types';
 import { RoomActions } from './room-state.actions';
 import { RoomState } from './room.state';
@@ -16,7 +10,7 @@ import { RoomState } from './room.state';
 @Injectable({
     providedIn: 'root',
 })
-export class RoomStateFacade extends Destroyable {
+export class RoomStateFacade extends NgXsActionable {
     @Select(RoomState.rooms)
     public readonly rooms$!: Observable<Room[]>;
 
@@ -25,16 +19,18 @@ export class RoomStateFacade extends Destroyable {
 
     public isRoomsLoaded$!: Observable<boolean>;
 
-    private _isRoomsLoaded!: BehaviorSubject<boolean>;
+    private readonly _isRoomsLoaded$: BehaviorSubject<boolean> =
+        new BehaviorSubject<boolean>(false);
 
     private readonly _isRoomLoadedDispachedActions = [RoomActions.Load];
     private readonly _isRoomLoadedSuccessfulActions = [RoomActions.Load];
 
     constructor(
         private readonly _store: Store,
-        private readonly _actions: Actions
+        private readonly _storeActions: Actions
     ) {
-        super();
+        super(_storeActions);
+
         this._configureIsRoomLoaded();
     }
 
@@ -43,22 +39,18 @@ export class RoomStateFacade extends Destroyable {
     }
 
     private _configureIsRoomLoaded() {
-        this._isRoomsLoaded = new BehaviorSubject<boolean>(false);
+        this.isRoomsLoaded$ = this._isRoomsLoaded$.asObservable();
 
-        this.isRoomsLoaded$ = this._isRoomsLoaded.asObservable();
+        this._listenDispached(
+            this._isRoomsLoaded$,
+            false,
+            ...this._isRoomLoadedDispachedActions
+        );
 
-        this._actions
-            .pipe(
-                ofActionDispatched(...this._isRoomLoadedDispachedActions),
-                takeUntil(this.alive$)
-            )
-            .subscribe(() => this._isRoomsLoaded.next(false));
-
-        this._actions
-            .pipe(
-                ofActionSuccessful(...this._isRoomLoadedSuccessfulActions),
-                takeUntil(this.alive$)
-            )
-            .subscribe(() => this._isRoomsLoaded.next(true));
+        this._listenSuccessful(
+            this._isRoomsLoaded$,
+            true,
+            ...this._isRoomLoadedSuccessfulActions
+        );
     }
 }

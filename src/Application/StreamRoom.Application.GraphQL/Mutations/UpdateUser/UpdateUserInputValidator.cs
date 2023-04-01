@@ -10,11 +10,11 @@ public class UpdateUserInputValidator : AbstractValidator<UpdateUserInput>
             .NotEmpty()
             .WithMessage("{PropertyName} must be non empty.");
 
-        RuleFor(updateUserInput => updateUserInput.Name)
+        RuleFor(updateUserInput => updateUserInput.Nickname)
             .NotEmpty()
             .WithMessage("{PropertyName} must be non empty.");
 
-        RuleFor(updateUserInput => updateUserInput.Name)
+        RuleFor(updateUserInput => updateUserInput.Nickname)
             .MinimumLength(5)
             .WithMessage("{PropertyName} must be greater than {MinLength}.");
     }

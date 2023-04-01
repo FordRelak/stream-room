@@ -10,8 +10,8 @@ public class UserType : ObjectType<User>
             .Description("User Id.");
 
         descriptor
-            .Field(type => type.Name)
+            .Field(type => type.Nickname)
             .Type<StringType>()
-            .Description("User name.");
+            .Description("User nickname.");
     }
 }
