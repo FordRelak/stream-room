@@ -1,11 +1,5 @@
 import { map, Observable, of } from 'rxjs';
-import {
-    Action,
-    Selector,
-    SelectorOptions,
-    State,
-    StateContext,
-} from '@ngxs/store';
+import { Action, NgxsOnInit, Selector, SelectorOptions, State, StateContext } from '@ngxs/store';
 
 import { Injectable } from '@angular/core';
 import { USER_PROFILE_STATE_TOKEN } from './userprofile-state.token';
@@ -29,14 +23,11 @@ const userProfileStateModelDefault: UserProfileStateModel = {
 @Injectable({
     providedIn: 'root',
 })
-export class UserProfileState {
+export class UserProfileState implements NgxsOnInit {
     constructor(private readonly _userApi: UserApi) {}
 
     @Action(UserProfileActions.SetNickname)
-    public setNickname(
-        context: StateContext<UserProfileStateModel>,
-        { nickname }: UserProfileActions.SetNickname
-    ): Observable<void> {
+    public setNickname(context: StateContext<UserProfileStateModel>, { nickname }: UserProfileActions.SetNickname): Observable<void> {
         const state = context.getState();
 
         if (state.id) {
@@ -47,9 +38,7 @@ export class UserProfileState {
     }
 
     @Action(UserProfileActions.FetchProfile)
-    public fetchProfile(
-        context: StateContext<UserProfileStateModel>
-    ): Observable<void> {
+    public fetchProfile(context: StateContext<UserProfileStateModel>): Observable<void> {
         const state = context.getState();
 
         if (!state.id) {
@@ -75,10 +64,17 @@ export class UserProfileState {
         return !!state.id;
     }
 
-    private _createUserWithNickname(
-        nickname: string,
-        context: StateContext<UserProfileStateModel>
-    ) {
+    ngxsOnInit(context: StateContext<UserProfileStateModel>): void {
+        const state = context.getState();
+
+        if (!state.id) {
+            return;
+        }
+
+        context.dispatch(new UserProfileActions.FetchProfile());
+    }
+
+    private _createUserWithNickname(nickname: string, context: StateContext<UserProfileStateModel>) {
         const newUser = <CreateUser>{
             nickname,
         };
@@ -93,11 +89,7 @@ export class UserProfileState {
         );
     }
 
-    private _updateUserNickname(
-        userId: string,
-        newNickname: string,
-        context: StateContext<UserProfileStateModel>
-    ) {
+    private _updateUserNickname(userId: string, newNickname: string, context: StateContext<UserProfileStateModel>) {
         const updateUser = <UpdateUser>{
             id: userId,
             nickname: newNickname,

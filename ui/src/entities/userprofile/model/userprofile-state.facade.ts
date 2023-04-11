@@ -19,16 +19,11 @@ export class UserProfileStateFacade extends NgXsActionable {
     public isLoaded$!: Observable<boolean>;
     public nicknameSetted$!: Observable<boolean>;
 
-    private readonly _isLoaded$: BehaviorSubject<boolean> =
-        new BehaviorSubject<boolean>(false);
+    private readonly _isLoaded$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-    private readonly _nicknameSetted$: BehaviorSubject<boolean> =
-        new BehaviorSubject<boolean>(false);
+    private readonly _nicknameSetted$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-    constructor(
-        private readonly _storeActions: Actions,
-        private readonly _store: Store
-    ) {
+    constructor(private readonly _storeActions: Actions, private readonly _store: Store) {
         super(_storeActions);
 
         this._configureIsLoaded();
@@ -46,26 +41,14 @@ export class UserProfileStateFacade extends NgXsActionable {
     private _configureIsLoaded() {
         this.isLoaded$ = this._isLoaded$.asObservable();
 
-        this._listenDispached(
-            this._isLoaded$,
-            false,
-            UserProfileActions.FetchProfile
-        );
+        this._listenDispached(this._isLoaded$, false, UserProfileActions.FetchProfile);
 
-        this._listenSuccessful(
-            this._isLoaded$,
-            true,
-            UserProfileActions.FetchProfile
-        );
+        this._listenSuccessful(this._isLoaded$, true, UserProfileActions.FetchProfile);
     }
 
     private _configureNicknameSetted() {
         this.nicknameSetted$ = this._nicknameSetted$.asObservable();
 
-        this._listenSuccessful(
-            this._nicknameSetted$,
-            true,
-            UserProfileActions.SetNickname
-        );
+        this._listenSuccessful(this._nicknameSetted$, true, UserProfileActions.SetNickname);
     }
 }

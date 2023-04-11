@@ -1,3 +1,5 @@
+import { LOCAL_STORAGE_ENGINE, NgxsStoragePluginModule } from '@ngxs/storage-plugin';
+
 import { NgModule } from '@angular/core';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
@@ -12,6 +14,15 @@ import { environment } from '@env/environment';
             developmentMode: !environment.production,
         }),
         NgxsReduxDevtoolsPluginModule.forRoot(),
+        NgxsStoragePluginModule.forRoot({
+            key: [
+                {
+                    key: UserProfileState,
+                    engine: LOCAL_STORAGE_ENGINE,
+                },
+            ],
+            namespace: 'stream-room',
+        }),
     ],
 })
 export class StoreModule {}

@@ -14,13 +14,7 @@ const MIN_NICKNAME_LENGTH = 5;
 @Component({
     selector: 'app-set-nickname-form',
     standalone: true,
-    imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatButtonModule,
-        MatInputModule,
-    ],
+    imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatButtonModule, MatInputModule],
     templateUrl: './set-nickname-form.component.html',
     styleUrls: ['./set-nickname-form.component.scss'],
 })
@@ -28,14 +22,9 @@ export class SetNicknameFormComponent extends Destroyable {
     @Output()
     public readonly nicknameChange = new EventEmitter<void>();
 
-    public readonly nicknameFormControl = new FormControl('', [
-        Validators.required,
-        Validators.minLength(MIN_NICKNAME_LENGTH),
-    ]);
+    public readonly nicknameFormControl = new FormControl('', [Validators.required, Validators.minLength(MIN_NICKNAME_LENGTH)]);
 
-    constructor(
-        private readonly _userProfileStateFacade: UserProfileStateFacade
-    ) {
+    constructor(private readonly _userProfileStateFacade: UserProfileStateFacade) {
         super();
 
         _userProfileStateFacade.nicknameSetted$
@@ -51,21 +40,14 @@ export class SetNicknameFormComponent extends Destroyable {
             return 'You must enter a value';
         }
 
-        return this.nicknameFormControl.hasError('minlength')
-            ? 'Min nickname length is ' + MIN_NICKNAME_LENGTH
-            : '';
+        return this.nicknameFormControl.hasError('minlength') ? 'Min nickname length is ' + MIN_NICKNAME_LENGTH : '';
     }
 
     public setNickname(): void {
-        if (
-            this.nicknameFormControl.invalid ||
-            !this.nicknameFormControl.value
-        ) {
+        if (this.nicknameFormControl.invalid || !this.nicknameFormControl.value) {
             return;
         }
 
-        this._userProfileStateFacade.setNickname(
-            this.nicknameFormControl.value
-        );
+        this._userProfileStateFacade.setNickname(this.nicknameFormControl.value);
     }
 }

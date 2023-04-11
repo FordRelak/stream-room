@@ -8,10 +8,7 @@ import { NgModule } from '@angular/core';
 import { createClient } from 'graphql-ws';
 import { getMainDefinition } from '@apollo/client/utilities';
 
-export function createApollo(
-    httpLink: HttpLink,
-    environmentService: EnvironmentService
-): ApolloClientOptions<any> {
+export function createApollo(httpLink: HttpLink, environmentService: EnvironmentService): ApolloClientOptions<any> {
     const httpUri = environmentService.get<string>('graphqlUri');
     const wsUri = environmentService.get<string>('wsUri');
 
@@ -30,10 +27,7 @@ export function createApollo(
         ({ query }) => {
             const definition = getMainDefinition(query);
 
-            return (
-                definition.kind === 'OperationDefinition' &&
-                definition.operation === 'subscription'
-            );
+            return definition.kind === 'OperationDefinition' && definition.operation === 'subscription';
         },
         ws,
         http

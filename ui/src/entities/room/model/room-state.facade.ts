@@ -19,16 +19,12 @@ export class RoomStateFacade extends NgXsActionable {
 
     public isRoomsLoaded$!: Observable<boolean>;
 
-    private readonly _isRoomsLoaded$: BehaviorSubject<boolean> =
-        new BehaviorSubject<boolean>(false);
+    private readonly _isRoomsLoaded$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     private readonly _isRoomLoadedDispachedActions = [RoomActions.Load];
     private readonly _isRoomLoadedSuccessfulActions = [RoomActions.Load];
 
-    constructor(
-        private readonly _store: Store,
-        private readonly _storeActions: Actions
-    ) {
+    constructor(private readonly _store: Store, private readonly _storeActions: Actions) {
         super(_storeActions);
 
         this._configureIsRoomLoaded();
@@ -41,16 +37,8 @@ export class RoomStateFacade extends NgXsActionable {
     private _configureIsRoomLoaded() {
         this.isRoomsLoaded$ = this._isRoomsLoaded$.asObservable();
 
-        this._listenDispached(
-            this._isRoomsLoaded$,
-            false,
-            ...this._isRoomLoadedDispachedActions
-        );
+        this._listenDispached(this._isRoomsLoaded$, false, ...this._isRoomLoadedDispachedActions);
 
-        this._listenSuccessful(
-            this._isRoomsLoaded$,
-            true,
-            ...this._isRoomLoadedSuccessfulActions
-        );
+        this._listenSuccessful(this._isRoomsLoaded$, true, ...this._isRoomLoadedSuccessfulActions);
     }
 }

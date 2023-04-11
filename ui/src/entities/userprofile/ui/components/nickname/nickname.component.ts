@@ -11,7 +11,5 @@ import { UserProfileStateFacade } from '@entities/userprofile/model';
 export class NicknameComponent {
     public readonly nickname$ = this._userProfileStateFacade.nickname$;
 
-    constructor(
-        private readonly _userProfileStateFacade: UserProfileStateFacade
-    ) {}
+    constructor(private readonly _userProfileStateFacade: UserProfileStateFacade) {}
 }

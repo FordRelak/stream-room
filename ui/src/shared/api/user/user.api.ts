@@ -32,34 +32,21 @@ export class UserApi {
 
     public create(newUser: CreateUser): Observable<string> {
         return this._api
-            .mutate<CreateUserMutation, CreateUserMutationVariables>(
-                CreateUserDocument,
-                {
-                    user: {
-                        nickname: newUser.nickname,
-                    },
-                }
-            )
-            .pipe(
-                map(
-                    (createUserDocument) =>
-                        <string>createUserDocument.addUser.id
-                )
-            );
+            .mutate<CreateUserMutation, CreateUserMutationVariables>(CreateUserDocument, {
+                user: {
+                    nickname: newUser.nickname,
+                },
+            })
+            .pipe(map((createUserDocument) => <string>createUserDocument.addUser.id));
     }
 
     public update(user: UpdateUser): Observable<string> {
         return this._api
-            .mutate<UpdateUserMutation, UpdateUserMutationVariables>(
-                UpdateUserDocument,
-                {
-                    user: <UpdateUserInput>{
-                        ...user,
-                    },
-                }
-            )
-            .pipe(
-                map((updateUserDocument) => updateUserDocument.updateUser.id)
-            );
+            .mutate<UpdateUserMutation, UpdateUserMutationVariables>(UpdateUserDocument, {
+                user: <UpdateUserInput>{
+                    ...user,
+                },
+            })
+            .pipe(map((updateUserDocument) => updateUserDocument.updateUser.id));
     }
 }
