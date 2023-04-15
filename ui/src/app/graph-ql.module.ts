@@ -8,7 +8,10 @@ import { NgModule } from '@angular/core';
 import { createClient } from 'graphql-ws';
 import { getMainDefinition } from '@apollo/client/utilities';
 
-export function createApollo(httpLink: HttpLink, environmentService: EnvironmentService): ApolloClientOptions<any> {
+export function createApollo(
+    httpLink: HttpLink,
+    environmentService: EnvironmentService
+): ApolloClientOptions<any> {
     const httpUri = environmentService.get<string>('graphqlUri');
     const wsUri = environmentService.get<string>('wsUri');
 

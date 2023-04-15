@@ -1,4 +1,11 @@
-import { RoomsDocument, RoomsQuery, RoomsQueryVariables, RoomQuery, RoomQueryVariables, RoomDocument } from '@shared/graphql';
+import {
+    RoomsDocument,
+    RoomsQuery,
+    RoomsQueryVariables,
+    RoomQuery,
+    RoomQueryVariables,
+    RoomDocument,
+} from '@shared/graphql';
 import { Observable, map } from 'rxjs';
 
 import { GraphQLApi } from '../graphql.api';

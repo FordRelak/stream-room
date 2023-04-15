@@ -11,7 +11,14 @@ import { environment } from '@env/environment';
 
 @NgModule({
     declarations: [AppComponent],
-    imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, StoreModule, GraphQLModule, HttpClientModule],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        StoreModule,
+        GraphQLModule,
+        HttpClientModule,
+    ],
     providers: [
         {
             provide: ENVIRONMENT_TOKEN,

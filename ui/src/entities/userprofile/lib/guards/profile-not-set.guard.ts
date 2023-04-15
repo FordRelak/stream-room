@@ -1,13 +1,22 @@
 /* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import {
+    ActivatedRouteSnapshot,
+    CanActivate,
+    CanActivateChild,
+    Router,
+    RouterStateSnapshot,
+    UrlTree,
+} from '@angular/router';
 import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 import { Observable, map } from 'rxjs';
 
 import { UserProfileStateFacade } from '@entities/userprofile/model';
 
-export const PROFILE_NOT_SET_GUARD_CALLBACK_URL_TOKEN = new InjectionToken<string>('APP_PROFILE_NOT_SET_GUARD_CALLBACK_URL');
+export const PROFILE_NOT_SET_GUARD_CALLBACK_URL_TOKEN = new InjectionToken<string>(
+    'APP_PROFILE_NOT_SET_GUARD_CALLBACK_URL'
+);
 
 @Injectable({
     providedIn: 'root',

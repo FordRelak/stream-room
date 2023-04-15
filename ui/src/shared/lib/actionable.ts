@@ -11,10 +11,14 @@ export class NgXsActionable extends Destroyable {
     }
 
     protected _listenSuccessful<T>(subject$: Subject<T>, nextValue: T, ...actions: ActionType[]) {
-        this._actions.pipe(ofActionSuccessful(...actions), takeUntil(this.destroy$)).subscribe(() => subject$.next(nextValue));
+        this._actions
+            .pipe(ofActionSuccessful(...actions), takeUntil(this.destroy$))
+            .subscribe(() => subject$.next(nextValue));
     }
 
     protected _listenDispached<T>(subject$: Subject<T>, nextValue: T, ...actions: ActionType[]) {
-        this._actions.pipe(ofActionDispatched(...actions), takeUntil(this.destroy$)).subscribe(() => subject$.next(nextValue));
+        this._actions
+            .pipe(ofActionDispatched(...actions), takeUntil(this.destroy$))
+            .subscribe(() => subject$.next(nextValue));
     }
 }

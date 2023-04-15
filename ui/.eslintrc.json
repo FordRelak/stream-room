@@ -34,7 +34,7 @@
                         "arrowParens": "always",
                         "bracketSpacing": true,
                         "endOfLine": "crlf",
-                        "printWidth": 150
+                        "printWidth": 110
                     }
                 ],
                 "@typescript-eslint/naming-convention": [

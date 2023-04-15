@@ -27,7 +27,10 @@ export class UserProfileState implements NgxsOnInit {
     constructor(private readonly _userApi: UserApi) {}
 
     @Action(UserProfileActions.SetNickname)
-    public setNickname(context: StateContext<UserProfileStateModel>, { nickname }: UserProfileActions.SetNickname): Observable<void> {
+    public setNickname(
+        context: StateContext<UserProfileStateModel>,
+        { nickname }: UserProfileActions.SetNickname
+    ): Observable<void> {
         const state = context.getState();
 
         if (state.id) {
@@ -89,7 +92,11 @@ export class UserProfileState implements NgxsOnInit {
         );
     }
 
-    private _updateUserNickname(userId: string, newNickname: string, context: StateContext<UserProfileStateModel>) {
+    private _updateUserNickname(
+        userId: string,
+        newNickname: string,
+        context: StateContext<UserProfileStateModel>
+    ) {
         const updateUser = <UpdateUser>{
             id: userId,
             nickname: newNickname,
