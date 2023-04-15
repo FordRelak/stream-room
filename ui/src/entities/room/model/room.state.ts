@@ -1,17 +1,11 @@
-import {
-    Action,
-    Selector,
-    SelectorOptions,
-    State,
-    StateContext,
-} from '@ngxs/store';
+import { Action, Selector, SelectorOptions, State, StateContext } from '@ngxs/store';
 import { Observable, tap } from 'rxjs';
 
 import { Injectable } from '@angular/core';
 import { ROOM_STATE_TOKEN } from './room-state.token';
 import { Room } from '@shared/types';
-import { RoomActions } from './room.actions';
-import { RoomApi } from '@shared/api';
+import { RoomActions } from './room-state.actions';
+import { RoomApi } from '@shared/api/room';
 import { RoomStateModel } from './room-state.model';
 
 const roomStateModelDefaults: RoomStateModel = {
@@ -33,12 +27,8 @@ export class RoomState {
     constructor(private readonly _roomApi: RoomApi) {}
 
     @Action(RoomActions.Load)
-    public loadRooms(
-        context: StateContext<RoomStateModel>
-    ): Observable<Room[]> {
-        return this._roomApi
-            .getRooms()
-            .pipe(tap((rooms) => context.patchState({ rooms })));
+    public loadRooms(context: StateContext<RoomStateModel>): Observable<Room[]> {
+        return this._roomApi.getRooms().pipe(tap((rooms) => context.patchState({ rooms })));
     }
 
     @Selector([ROOM_STATE_TOKEN])

@@ -1,0 +1,11 @@
+<div class="startup">
+    <ng-container *ngIf="isLoaded$ | async; else loading">
+        <app-set-nickname-form
+            (nicknameChange)="routeToRooms()"
+            class="startup-set-nickname-form"></app-set-nickname-form>
+    </ng-container>
+
+    <ng-template #loading>
+        <app-spinner></app-spinner>
+    </ng-template>
+</div>

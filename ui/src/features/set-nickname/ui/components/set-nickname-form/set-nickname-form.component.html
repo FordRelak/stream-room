@@ -1,0 +1,22 @@
+<form class="set-nickname-form">
+    <mat-form-field class="set-nickname-form-field" appearance="outline">
+        <mat-label class="set-nickname-form-field-label">Nickname</mat-label>
+        <input
+            matInput
+            placeholder="Your nickname"
+            [formControl]="nicknameFormControl"
+            required
+            class="set-nickname-form-field-input" />
+        <mat-error *ngIf="nicknameFormControl.invalid">
+            {{ getErrorMessage() }}
+        </mat-error>
+    </mat-form-field>
+    <button
+        type="button"
+        mat-raised-button
+        color="primary"
+        [disabled]="nicknameFormControl.invalid"
+        (click)="setNickname()">
+        Set nickname
+    </button>
+</form>

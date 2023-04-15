@@ -1,0 +1,7 @@
+@import 'mixins/sizes';
+@import 'mixins/flex';
+
+.spinner {
+    @include fill-100;
+    @include flex-center;
+}

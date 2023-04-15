@@ -8,8 +8,8 @@ public class AddUserInputType : InputObjectType<AddUserInput>
             .Description("Type to add user.");
 
         descriptor
-            .Field(type => type.Name)
+            .Field(type => type.Nickname)
             .Type<NonNullType<StringType>>()
-            .Description("Name of new user.");
+            .Description("Nickname of new user.");
     }
 }

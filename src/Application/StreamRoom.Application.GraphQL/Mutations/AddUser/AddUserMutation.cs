@@ -19,7 +19,7 @@ public class AddUserMutation : ObjectTypeExtension<Mutation>
         {
             var newUser = new User
             {
-                Name = input.Name,
+                Nickname = input.Nickname,
             };
 
             await userRepository.InsertAsync(newUser);

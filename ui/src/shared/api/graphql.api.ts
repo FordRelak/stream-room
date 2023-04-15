@@ -2,12 +2,7 @@ import { Apollo, TypedDocumentNode } from 'apollo-angular';
 import { Observable, map } from 'rxjs';
 
 import { Injectable } from '@angular/core';
-import {
-    DocumentNode,
-    MutationOptions,
-    QueryOptions,
-    SubscriptionOptions,
-} from '@apollo/client/core';
+import { DocumentNode, MutationOptions, QueryOptions, SubscriptionOptions } from '@apollo/client/core';
 import { EmptyObject } from 'apollo-angular/build/types';
 
 @Injectable({
@@ -28,9 +23,7 @@ export class GraphQLApi {
             options.variables = variables;
         }
 
-        return this._apollo
-            .query<TValue, TVariables>(options)
-            .pipe(map((result) => result.data));
+        return this._apollo.query<TValue, TVariables>(options).pipe(map((result) => result.data));
     }
 
     public mutate<TValue, TVariables = EmptyObject>(
@@ -45,9 +38,7 @@ export class GraphQLApi {
             options.variables = variables;
         }
 
-        return this._apollo
-            .mutate<TValue, TVariables>(options)
-            .pipe(map((result) => result.data!));
+        return this._apollo.mutate<TValue, TVariables>(options).pipe(map((result) => result.data!));
     }
 
     public subscribe<TValue, TVariables = EmptyObject>(
@@ -62,8 +53,6 @@ export class GraphQLApi {
             options.variables = variables;
         }
 
-        return this._apollo
-            .subscribe<TValue, TVariables>(options)
-            .pipe(map((result) => result.data!));
+        return this._apollo.subscribe<TValue, TVariables>(options).pipe(map((result) => result.data!));
     }
 }
