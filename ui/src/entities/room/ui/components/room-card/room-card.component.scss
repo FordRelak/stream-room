@@ -1,0 +1,7 @@
+@import 'variables/colors';
+
+.room-card {
+    &-title {
+        color: $text-white;
+    }
+}
