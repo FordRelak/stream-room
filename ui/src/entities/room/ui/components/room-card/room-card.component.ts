@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 
 import { Room } from '@shared/types';
 
@@ -10,4 +11,17 @@ import { Room } from '@shared/types';
 export class RoomCardComponent {
     @Input()
     public room?: Room;
+
+    public readonly rippleLaunch$: Observable<void>;
+
+    private readonly _rippleLaunch$: Subject<void> = new Subject<void>();
+
+    constructor() {
+        this.rippleLaunch$ = this._rippleLaunch$.asObservable();
+    }
+
+    @HostListener('mouseenter')
+    public lauchRipple(): void {
+        this._rippleLaunch$.next();
+    }
 }

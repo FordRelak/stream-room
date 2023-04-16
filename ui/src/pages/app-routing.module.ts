@@ -17,7 +17,7 @@ export enum PageRoutesEnum {
 const routes: Routes = [
     {
         path: PageRoutesEnum.Rooms,
-        loadChildren: () => import('./room-list/room-list-page.module').then((m) => m.RoomListPageModule),
+        loadChildren: () => import('./rooms/rooms-page.module').then((m) => m.RoomListPageModule),
         canActivate: [ProfileSetGuard],
         canActivateChild: [ProfileSetGuard],
         providers: [
