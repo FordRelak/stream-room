@@ -37,6 +37,7 @@
                         "printWidth": 110
                     }
                 ],
+                "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 2 }],
                 "@typescript-eslint/naming-convention": [
                     "error",
                     {
@@ -100,7 +101,11 @@
                 ],
 
                 "no-duplicate-imports": "error",
-                "@typescript-eslint/lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
+                "@typescript-eslint/lines-between-class-members": [
+                    "error",
+                    "always",
+                    { "exceptAfterSingleLine": true }
+                ],
                 "class-methods-use-this": "off",
                 "linebreak-style": ["error", "windows"],
 
@@ -117,7 +122,10 @@
                     }
                 ],
 
-                "padding-line-between-statements": ["error", { "blankLine": "always", "prev": "*", "next": "return" }],
+                "padding-line-between-statements": [
+                    "error",
+                    { "blankLine": "always", "prev": "*", "next": "return" }
+                ],
                 "import/no-extraneous-dependencies": "off"
             }
         },

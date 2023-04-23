@@ -15,7 +15,7 @@ export class RoomStateFacade extends NgXsActionable {
     public readonly rooms$!: Observable<Room[]>;
 
     @Select(RoomState.currentRoom)
-    public readonly currentRoom$!: Observable<Room[]>;
+    public readonly currentRoom$!: Observable<Room>;
 
     public isRoomsLoaded$!: Observable<boolean>;
 

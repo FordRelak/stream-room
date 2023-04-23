@@ -1,7 +1,9 @@
+import { AddRoomModel } from '@shared/api/room/models';
+
 export namespace RoomActions {
-    export class Create {
+    export class Add {
         static readonly type: string = '[ROOM] Create Room';
-        constructor(public name: string) {}
+        constructor(public newRoom: AddRoomModel) {}
     }
 
     export class Delete {

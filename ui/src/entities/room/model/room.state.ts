@@ -1,6 +1,7 @@
 import { Action, Selector, SelectorOptions, State, StateContext } from '@ngxs/store';
-import { Observable, tap } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 
+import { AddRoomModel } from '@shared/api/room/models';
 import { Injectable } from '@angular/core';
 import { ROOM_STATE_TOKEN } from './room-state.token';
 import { Room } from '@shared/types';
@@ -31,13 +32,27 @@ export class RoomState {
         return this._roomApi.getRooms().pipe(tap((rooms) => context.patchState({ rooms })));
     }
 
+    @Action(RoomActions.Add)
+    public addRoom(context: StateContext<RoomStateModel>, newRoom: AddRoomModel): Observable<void> {
+        return this._roomApi.addRoom(newRoom).pipe(
+            map((roomId) => {
+                context.patchState({
+                    currentRoom: {
+                        id: roomId,
+                        ...newRoom,
+                    },
+                });
+            })
+        );
+    }
+
     @Selector([ROOM_STATE_TOKEN])
     static rooms(state: RoomStateModel): Room[] {
         return state.rooms;
     }
 
-    @Selector([ROOM_STATE_TOKEN, RoomState.rooms])
-    static currentRoom(state: RoomStateModel, rooms: Room[]): Room | undefined {
-        return rooms.find((room) => room.id === state.currentRoomId);
+    @Selector([ROOM_STATE_TOKEN])
+    static currentRoom(state: RoomStateModel): Room | undefined {
+        return state.currentRoom;
     }
 }
