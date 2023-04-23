@@ -14,7 +14,7 @@ import {
     UserQuery,
     UserQueryVariables,
 } from '@shared/graphql';
-import { CreateUser, UpdateUser } from './models';
+import { CreateUserModel, UpdateUserModel } from './models';
 
 @Injectable({
     providedIn: 'root',
@@ -30,7 +30,7 @@ export class UserApi {
             .pipe(map((userQuery) => <User>userQuery.user));
     }
 
-    public create(newUser: CreateUser): Observable<string> {
+    public create(newUser: CreateUserModel): Observable<string> {
         return this._api
             .mutate<CreateUserMutation, CreateUserMutationVariables>(CreateUserDocument, {
                 user: {
@@ -40,7 +40,7 @@ export class UserApi {
             .pipe(map((createUserDocument) => <string>createUserDocument.addUser.id));
     }
 
-    public update(user: UpdateUser): Observable<string> {
+    public update(user: UpdateUserModel): Observable<string> {
         return this._api
             .mutate<UpdateUserMutation, UpdateUserMutationVariables>(UpdateUserDocument, {
                 user: <UpdateUserInput>{

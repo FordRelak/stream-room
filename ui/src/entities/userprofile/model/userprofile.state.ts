@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { USER_PROFILE_STATE_TOKEN } from './userprofile-state.token';
 import { UserProfileStateModel } from './userprofile-state.model';
 import { UserProfileActions } from './userprofile-state.actions';
-import { CreateUser, UpdateUser, UserApi } from '@shared/api/user';
+import { CreateUserModel, UpdateUserModel, UserApi } from '@shared/api/user';
 
 const userProfileStateModelDefault: UserProfileStateModel = {
     id: '',
@@ -78,7 +78,7 @@ export class UserProfileState implements NgxsOnInit {
     }
 
     private _createUserWithNickname(nickname: string, context: StateContext<UserProfileStateModel>) {
-        const newUser = <CreateUser>{
+        const newUser = <CreateUserModel>{
             nickname,
         };
 
@@ -97,7 +97,7 @@ export class UserProfileState implements NgxsOnInit {
         newNickname: string,
         context: StateContext<UserProfileStateModel>
     ) {
-        const updateUser = <UpdateUser>{
+        const updateUser = <UpdateUserModel>{
             id: userId,
             nickname: newNickname,
         };

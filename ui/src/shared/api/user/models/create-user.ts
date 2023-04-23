@@ -1,3 +1,3 @@
-export interface CreateUser {
+export interface CreateUserModel {
     nickname: string;
 }
