@@ -1,9 +1,13 @@
+import { RoomDetailedComponent, RoomListComponent } from './components';
 import { RouterModule, Routes } from '@angular/router';
 
 import { NgModule } from '@angular/core';
-import { RoomListComponent } from './components';
 
 const routes: Routes = [
+    {
+        path: ':id',
+        component: RoomDetailedComponent,
+    },
     {
         path: '',
         component: RoomListComponent,

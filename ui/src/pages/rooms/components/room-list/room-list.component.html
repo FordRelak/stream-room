@@ -1,3 +1,7 @@
+<div class="add-room-small-button">
+    <app-add-room-small-button></app-add-room-small-button>
+</div>
+
 <div class="room-list" *ngIf="rooms$ | async as rooms; else loading">
     <div *ngFor="let room of rooms" class="room-list-item">
         <app-room-card [room]="room"></app-room-card>

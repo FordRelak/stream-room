@@ -9,6 +9,7 @@ builder.Services.RegisterJsonOptions();
 builder.Services.AddCors();
 
 builder.Services.AddGraphQLServer()
+                .AddInMemorySubscriptions()
                 .RegisterGraphQL();
 
 builder.Services.RegisterValidation();

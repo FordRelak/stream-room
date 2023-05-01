@@ -1,5 +1,5 @@
 import { EntityBase } from '@shared/types/entity-base';
 
-export interface UpdateUser extends EntityBase {
+export interface UpdateUserModel extends EntityBase {
     nickname: string;
 }

@@ -43,8 +43,6 @@ public static class GraphQLRequestExecutorBuilderExtension
             .AddSubscriptionType<Subscription>()
             .AddTypeExtension<ConsumeRoomCommandsSubscription>()
 
-            .AddInMemorySubscriptions()
-
             .RegisterValidationGraphQLInputs()
         ;
 

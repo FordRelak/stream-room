@@ -1,16 +1,27 @@
 @import 'mixins/flex';
 
-.room-list {
+:host {
     @include flex-column;
 
     max-width: 500px;
-    align-items: center;
     margin: 0 auto;
     width: 100%;
+}
+
+.room-list {
+    @include flex-column;
+
+    align-items: center;
     row-gap: 1rem;
     padding-top: 5rem;
 
     &-item {
         width: 100%;
     }
+}
+
+.add-room-small-button {
+    display: flex;
+    margin-left: auto;
+    padding-top: 2rem;
 }

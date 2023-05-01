@@ -1,0 +1,6 @@
+<div class="add-room-small-button">
+    <app-plus-button (clicked)="toggleShowingForm()"></app-plus-button>
+</div>
+<div [@slideDownAnimation] class="add-room-form" *ngIf="isShowForm">
+    <app-add-room-form (needClose)="toggleShowingForm()"></app-add-room-form>
+</div>

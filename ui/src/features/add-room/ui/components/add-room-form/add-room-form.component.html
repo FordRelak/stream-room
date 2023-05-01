@@ -1,0 +1,32 @@
+<form class="add-room-form">
+    <div class="arrow-upward-wrapper">
+        <mat-icon
+            class="arrow-upward"
+            [inline]="true"
+            matRipple
+            [matRippleCentered]="true"
+            (click)="needClose.emit()">
+            arrow_upward
+        </mat-icon>
+    </div>
+    <mat-form-field class="set-nickname-form-field" appearance="outline">
+        <mat-label class="set-nickname-form-field-label">Room name</mat-label>
+        <input
+            matInput
+            placeholder="best name ever"
+            [formControl]="roomNameFormControl"
+            required
+            class="set-nickname-form-field-input" />
+        <mat-error *ngIf="roomNameFormControl.invalid">
+            {{ getErrorMessage() }}
+        </mat-error>
+    </mat-form-field>
+    <button
+        type="button"
+        [disabled]="roomNameFormControl.invalid"
+        mat-raised-button
+        color="primary"
+        (click)="createAndJoin()">
+        Create and join
+    </button>
+</form>

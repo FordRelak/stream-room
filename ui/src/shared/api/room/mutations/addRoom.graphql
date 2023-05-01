@@ -1,0 +1,5 @@
+mutation addRoom($input: AddRoomInput!) {
+    addRoom(input: $input) {
+        id
+    }
+}

@@ -23,7 +23,8 @@
             "@entities/*": ["src/entities/*"],
             "@shared/*": ["src/shared/*"],
             "@features/*": ["src/features/*"],
-            "@env/*": ["src/environments/*"]
+            "@env/*": ["src/environments/*"],
+            "@processes/*": ["src/processes/*"]
         },
         "allowSyntheticDefaultImports": true,
         "useDefineForClassFields": false

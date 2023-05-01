@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { RoomState } from '@entities/room';
+import { RoomStateCurrentRoomListenerRedirectorService } from '@processes/state-listeners';
 import { UserProfileState } from '@entities/userprofile';
 import { environment } from '@env/environment';
 
@@ -24,5 +25,10 @@ import { environment } from '@env/environment';
             namespace: 'stream-room',
         }),
     ],
+    providers: [RoomStateCurrentRoomListenerRedirectorService],
 })
-export class StoreModule {}
+export class StoreModule {
+    constructor(
+        private readonly _roomStateCurrentRoomListenerRedirectorService: RoomStateCurrentRoomListenerRedirectorService
+    ) {}
+}

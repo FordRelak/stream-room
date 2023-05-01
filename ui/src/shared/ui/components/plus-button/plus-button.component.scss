@@ -1,0 +1,42 @@
+@use 'sass:color';
+@import 'variables/colors';
+
+$plus-bg-color: #424242;
+
+.plus-btn {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: $plus-bg-color;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.plus {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    transform: translateY(-50%);
+}
+
+.plus::before,
+.plus::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    height: 2px;
+    background-color: color.adjust($color: $white, $lightness: -20%);
+}
+
+.plus::before {
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.plus::after {
+    transform: translate(-50%, -50%);
+}
