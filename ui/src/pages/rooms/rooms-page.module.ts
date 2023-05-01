@@ -1,3 +1,4 @@
+import { AddRoomSmallButtonComponent } from '@features/add-room';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RoomEntityModule } from '@entities/room';
@@ -7,6 +8,12 @@ import { UISharedModule } from '@shared/ui';
 
 @NgModule({
     declarations: [RoomListComponent],
-    imports: [CommonModule, RoomEntityModule, UISharedModule, RoomListPageRouting],
+    imports: [
+        CommonModule,
+        RoomEntityModule,
+        UISharedModule,
+        RoomListPageRouting,
+        AddRoomSmallButtonComponent,
+    ],
 })
 export class RoomListPageModule {}

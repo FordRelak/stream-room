@@ -9,6 +9,6 @@ import { NgModule } from '@angular/core';
 @NgModule({
     declarations: [SpinnerComponent, RippleManualComponent, PlusButtonComponent],
     imports: [CommonModule, MatProgressSpinnerModule, MatCardModule, MatRippleModule],
-    exports: [SpinnerComponent, MatCardModule, RippleManualComponent],
+    exports: [SpinnerComponent, MatCardModule, RippleManualComponent, PlusButtonComponent],
 })
 export class UISharedModule {}
