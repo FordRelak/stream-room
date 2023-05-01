@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-	<PackageReference Include="AppAny.HotChocolate.FluentValidation" Version="0.10.0" />
-	<PackageReference Include="HotChocolate" Version="13.0.0-preview.70" />
+	<PackageReference Include="AppAny.HotChocolate.FluentValidation" Version="0.11.0" />
+	<PackageReference Include="HotChocolate" Version="13.0.5" />
   </ItemGroup>
 
   <ItemGroup>

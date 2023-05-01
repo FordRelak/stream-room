@@ -1,6 +1,7 @@
 import { Actions, Select, Store } from '@ngxs/store';
 import { BehaviorSubject, Observable } from 'rxjs';
 
+import { AddRoomModel } from '@shared/api/room/models';
 import { Injectable } from '@angular/core';
 import { NgXsActionable } from '@shared/lib';
 import { Room } from '@shared/types';
@@ -32,6 +33,10 @@ export class RoomStateFacade extends NgXsActionable {
 
     public loadRooms(): void {
         this._store.dispatch(RoomActions.Load);
+    }
+
+    public createAndJoin(newRoomModel: AddRoomModel): void {
+        this._store.dispatch(new RoomActions.Add(newRoomModel));
     }
 
     private _configureIsRoomLoaded() {

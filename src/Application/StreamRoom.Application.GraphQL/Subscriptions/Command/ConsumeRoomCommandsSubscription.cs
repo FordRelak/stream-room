@@ -20,7 +20,7 @@ public class ConsumeRoomCommandsSubscription : ObjectTypeExtension<Subscription>
 
                 var topicName = string.Format(SubscriptionConstants.ROOM_TOPIC_NAME_FORMAT, roomId);
 
-                var stream = await receiver.SubscribeAsync<string, CommandDto>(topicName);
+                var stream = await receiver.SubscribeAsync<CommandDto>(topicName);
 
                 return stream;
             })

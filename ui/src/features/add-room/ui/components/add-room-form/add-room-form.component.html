@@ -21,5 +21,12 @@
             {{ getErrorMessage() }}
         </mat-error>
     </mat-form-field>
-    <button type="button" mat-raised-button color="primary">Create and join</button>
+    <button
+        type="button"
+        [disabled]="roomNameFormControl.invalid"
+        mat-raised-button
+        color="primary"
+        (click)="createAndJoin()">
+        Create and join
+    </button>
 </form>

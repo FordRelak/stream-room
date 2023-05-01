@@ -1,7 +1,6 @@
 import { Action, Selector, SelectorOptions, State, StateContext } from '@ngxs/store';
 import { Observable, map, tap } from 'rxjs';
 
-import { AddRoomModel } from '@shared/api/room/models';
 import { Injectable } from '@angular/core';
 import { ROOM_STATE_TOKEN } from './room-state.token';
 import { Room } from '@shared/types';
@@ -33,7 +32,7 @@ export class RoomState {
     }
 
     @Action(RoomActions.Add)
-    public addRoom(context: StateContext<RoomStateModel>, newRoom: AddRoomModel): Observable<void> {
+    public addRoom(context: StateContext<RoomStateModel>, { newRoom }: RoomActions.Add): Observable<void> {
         return this._roomApi.addRoom(newRoom).pipe(
             map((roomId) => {
                 context.patchState({

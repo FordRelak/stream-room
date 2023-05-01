@@ -27,4 +27,8 @@ import { environment } from '@env/environment';
     ],
     providers: [RoomStateCurrentRoomListenerRedirectorService],
 })
-export class StoreModule {}
+export class StoreModule {
+    constructor(
+        private readonly _roomStateCurrentRoomListenerRedirectorService: RoomStateCurrentRoomListenerRedirectorService
+    ) {}
+}
