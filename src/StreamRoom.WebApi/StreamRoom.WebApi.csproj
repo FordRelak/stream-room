@@ -11,12 +11,14 @@
 
   <ItemGroup>
 	<PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
-	<PackageReference Include="HotChocolate.AspNetCore" Version="13.0.5" />
+	<PackageReference Include="HotChocolate.AspNetCore" Version="13.2.1" />
+	<PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="13.2.1" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Application\StreamRoom.Application.GraphQL\StreamRoom.Application.GraphQL.csproj" />
+    <ProjectReference Include="..\Infrastructure\StreamRoom.Infrastructure.Authentication.AspNet\StreamRoom.Infrastructure.Authentication.AspNet.csproj" />
     <ProjectReference Include="..\Infrastructure\StreamRoom.Infrastructure.Redis\StreamRoom.Infrastructure.Redis.csproj" />
   </ItemGroup>
 

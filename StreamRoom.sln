@@ -23,13 +23,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreamRoom.Domain", "src\Do
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreamRoom.Application", "src\Application\StreamRoom.Application\StreamRoom.Application.csproj", "{42ABB347-974D-4FDE-954C-B46773E5DD0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamRoom.Infrastructure.Redis", "src\Infrastructure\StreamRoom.Infrastructure.Redis\StreamRoom.Infrastructure.Redis.csproj", "{651B9A6D-D01F-46E9-B62D-880889A84569}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreamRoom.Infrastructure.Redis", "src\Infrastructure\StreamRoom.Infrastructure.Redis\StreamRoom.Infrastructure.Redis.csproj", "{651B9A6D-D01F-46E9-B62D-880889A84569}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamRoom.Application.GraphQL", "src\Application\StreamRoom.Application.GraphQL\StreamRoom.Application.GraphQL.csproj", "{F2F3841C-977D-4B43-9D94-591BF565A224}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreamRoom.Application.GraphQL", "src\Application\StreamRoom.Application.GraphQL\StreamRoom.Application.GraphQL.csproj", "{F2F3841C-977D-4B43-9D94-591BF565A224}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{9BCD25B6-A0E5-47C6-9418-A144CC8879C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamRoom.Common", "src\Common\StreamRoom.Common\StreamRoom.Common.csproj", "{653F9A73-1839-4543-A5FD-F134AB119492}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreamRoom.Common", "src\Common\StreamRoom.Common\StreamRoom.Common.csproj", "{653F9A73-1839-4543-A5FD-F134AB119492}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamRoom.Infrastructure.Authentication.AspNet", "src\Infrastructure\StreamRoom.Infrastructure.Authentication.AspNet\StreamRoom.Infrastructure.Authentication.AspNet.csproj", "{4DC326E1-BF91-460A-94B6-AD6F60DA4713}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,10 @@ Global
 		{653F9A73-1839-4543-A5FD-F134AB119492}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{653F9A73-1839-4543-A5FD-F134AB119492}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{653F9A73-1839-4543-A5FD-F134AB119492}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DC326E1-BF91-460A-94B6-AD6F60DA4713}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DC326E1-BF91-460A-94B6-AD6F60DA4713}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DC326E1-BF91-460A-94B6-AD6F60DA4713}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DC326E1-BF91-460A-94B6-AD6F60DA4713}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,6 +77,7 @@ Global
 		{651B9A6D-D01F-46E9-B62D-880889A84569} = {2B5DBF81-63C8-4442-AF19-E489973340AC}
 		{F2F3841C-977D-4B43-9D94-591BF565A224} = {B0CBFACA-B8DC-4E42-A494-624BC1E00F57}
 		{653F9A73-1839-4543-A5FD-F134AB119492} = {9BCD25B6-A0E5-47C6-9418-A144CC8879C5}
+		{4DC326E1-BF91-460A-94B6-AD6F60DA4713} = {2B5DBF81-63C8-4442-AF19-E489973340AC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {64BBB94E-F303-4049-9B6D-D169EBD69ED9}

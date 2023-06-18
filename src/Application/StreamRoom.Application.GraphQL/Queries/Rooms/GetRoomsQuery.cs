@@ -1,4 +1,6 @@
-﻿namespace StreamRoom.Application.GraphQL.Queries.Rooms;
+﻿using StreamRoom.Application.Repositories;
+
+namespace StreamRoom.Application.GraphQL.Queries.Rooms;
 
 public class GetRoomsQuery : ObjectTypeExtension<Query>
 {
@@ -6,6 +8,7 @@ public class GetRoomsQuery : ObjectTypeExtension<Query>
     {
         descriptor
             .Field(nameof(GetRoomsQuery).ToGqlName())
+            .Authorize()
             .Type<ListType<RoomType>>()
             .ResolveWith<GetRoomsResolver>(resolver => resolver.GetRoomsAsync(default!))
             .Description("Get rooms.");

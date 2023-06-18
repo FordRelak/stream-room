@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using StackExchange.Redis;
-using StreamRoom.Application;
+using StreamRoom.Application.Repositories;
 using StreamRoom.Domain;
 using System.Text.Json;
 

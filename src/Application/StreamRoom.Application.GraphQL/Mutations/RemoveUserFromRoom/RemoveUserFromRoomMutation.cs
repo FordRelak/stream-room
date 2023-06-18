@@ -1,4 +1,6 @@
-﻿namespace StreamRoom.Application.GraphQL.Mutations.RemoveUserFromRoom;
+﻿using StreamRoom.Application.Repositories;
+
+namespace StreamRoom.Application.GraphQL.Mutations.RemoveUserFromRoom;
 
 public class RemoveUserFromRoomMutation : ObjectType<Mutation>
 {

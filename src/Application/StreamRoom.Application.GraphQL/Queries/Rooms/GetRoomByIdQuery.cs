@@ -1,4 +1,6 @@
-﻿namespace StreamRoom.Application.GraphQL.Queries.Rooms;
+﻿using StreamRoom.Application.Repositories;
+
+namespace StreamRoom.Application.GraphQL.Queries.Rooms;
 
 public class GetRoomByIdQuery : ObjectTypeExtension<Query>
 {
