@@ -38,6 +38,10 @@ export class UserProfileStateFacade extends NgXsActionable {
         this._store.dispatch(new UserProfileActions.FetchProfile());
     }
 
+    public clear(): void {
+        this._store.dispatch(new UserProfileActions.ClearProfile());
+    }
+
     private _configureIsLoaded() {
         this.isLoaded$ = this._isLoaded$.asObservable();
 

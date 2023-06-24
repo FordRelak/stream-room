@@ -7,4 +7,8 @@ export namespace UserProfileActions {
     export class FetchProfile {
         static readonly type = '[User Profile] Fetch Profile';
     }
+
+    export class ClearProfile {
+        static readonly type = '[User Profile] Clear Profile';
+    }
 }
