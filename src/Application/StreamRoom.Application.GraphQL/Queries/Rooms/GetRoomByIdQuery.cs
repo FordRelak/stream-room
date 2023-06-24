@@ -6,6 +6,7 @@ public class GetRoomByIdQuery : ObjectTypeExtension<Query>
     {
         descriptor
             .Field(nameof(GetRoomByIdQuery).ToGqlName())
+            .Authorize()
             .Argument("id", argument => argument.Type<NonNullType<IdType>>())
             .Type<RoomType>()
             .ResolveWith<GetRoomByIdResolver>(resolver => resolver.GetRoomByIdAsync(default!, default!))

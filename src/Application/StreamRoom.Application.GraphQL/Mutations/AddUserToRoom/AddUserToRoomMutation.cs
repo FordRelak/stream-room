@@ -6,6 +6,7 @@ public class AddUserToRoomMutation : ObjectTypeExtension<Mutation>
     {
         descriptor
             .Field(nameof(AddUserToRoomMutation).ToGqlName())
+            .Authorize()
             .Argument("input", argument => argument.Type<NonNullType<AddUserToRoomInputType>>())
             .ResolveWith<AddUserToRoomResolver>(resolver => resolver.AddUserToRoomAsync(default!, default!, default!))
             .Description("Add user to room.");

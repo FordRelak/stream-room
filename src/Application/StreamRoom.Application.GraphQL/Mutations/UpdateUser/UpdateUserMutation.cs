@@ -8,6 +8,7 @@ public class UpdateUserMutation : ObjectTypeExtension<Mutation>
     {
         descriptor
             .Field(nameof(UpdateUserMutation).ToGqlName())
+            .Authorize()
             .Argument("input", argument => argument.Type<NonNullType<UpdateUserInputType>>().UseFluentValidation())
             .ResolveWith<UpdateUserResolver>(resolver => resolver.UpdateUserAsync(default!, default!))
             .Description("Update user.");
