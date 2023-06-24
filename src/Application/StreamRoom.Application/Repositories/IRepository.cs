@@ -1,6 +1,6 @@
 ﻿using StreamRoom.Domain;
 
-namespace StreamRoom.Application;
+namespace StreamRoom.Application.Repositories;
 
 public interface IRepository<T> where T : Base
 {

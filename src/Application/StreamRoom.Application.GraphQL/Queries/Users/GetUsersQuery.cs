@@ -6,6 +6,7 @@ public class GetUsersQuery : ObjectTypeExtension<Query>
     {
         descriptor
             .Field(nameof(GetUsersQuery).ToGqlName())
+            .Authorize()
             .Type<ListType<UserType>>()
             .ResolveWith<GetUsersResolver>(resolver => resolver.GetUsersAsync(default!))
             .Description("Get users.");

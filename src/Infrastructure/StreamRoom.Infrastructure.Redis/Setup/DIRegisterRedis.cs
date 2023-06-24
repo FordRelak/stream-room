@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StackExchange.Redis;
-using StreamRoom.Application;
+using StreamRoom.Application.Repositories;
 
 namespace StreamRoom.Infrastructure.Redis.Setup;
 

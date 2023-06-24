@@ -5,10 +5,8 @@ public class RemoveUserFromRoomMutation : ObjectType<Mutation>
     protected override void Configure(IObjectTypeDescriptor<Mutation> descriptor)
     {
         descriptor
-            .Description("Remove user from room.");
-
-        descriptor
             .Field(nameof(RemoveUserFromRoomMutation).ToGqlName())
+            .Authorize()
             .Argument("input", argument => argument.Type<NonNullType<RemoveUserFromRoomInputType>>())
             .ResolveWith<RemoveUserFromRoomResovler>(resolver => resolver.RemoveUserFromRoomAsync(default!, default!))
             .Description("Input for remove user from room.");

@@ -57,6 +57,11 @@ export class UserProfileState implements NgxsOnInit {
         );
     }
 
+    @Action(UserProfileActions.ClearProfile)
+    public clearProfile(context: StateContext<UserProfileStateModel>): void {
+        context.setState(userProfileStateModelDefault);
+    }
+
     @Selector([USER_PROFILE_STATE_TOKEN])
     static nickname(state: UserProfileStateModel): string {
         return state.nickname;

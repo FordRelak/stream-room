@@ -4,19 +4,20 @@ namespace StreamRoom.Application.GraphQL.Subscriptions.Command;
 
 public class ConsumeRoomCommandsSubscription : ObjectTypeExtension<Subscription>
 {
-    private const string RoomIdArgumentName = "roomId";
+    private const string _roomIdArgumentName = "roomId";
 
     protected override void Configure(IObjectTypeDescriptor<Subscription> descriptor)
     {
         descriptor
             .Field(nameof(ConsumeRoomCommandsSubscription).ToGqlName())
-            .Argument(RoomIdArgumentName, argument => argument.Type<NonNullType<UuidType>>()
+            .Authorize()
+            .Argument(_roomIdArgumentName, argument => argument.Type<NonNullType<UuidType>>()
                                                     .Description("Room id for the commands to subscribe to."))
             .ResolveWith<ConsumeRoomCommandsResolver>(resolver => resolver.SendCommandAsync(default!))
             .Subscribe(async context =>
             {
                 var receiver = context.Service<ITopicEventReceiver>();
-                var roomId = context.ArgumentValue<Guid>(RoomIdArgumentName);
+                var roomId = context.ArgumentValue<Guid>(_roomIdArgumentName);
 
                 var topicName = string.Format(SubscriptionConstants.ROOM_TOPIC_NAME_FORMAT, roomId);
 

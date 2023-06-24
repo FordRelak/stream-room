@@ -1,5 +1,4 @@
 ﻿using HotChocolate.Subscriptions;
-using StreamRoom.Application.GraphQL.Dtos;
 
 namespace StreamRoom.Application.GraphQL.Mutations.SendCommand;
 
@@ -9,6 +8,7 @@ public class SendCommandMutation : ObjectTypeExtension<Mutation>
     {
         descriptor
             .Field(nameof(SendCommandMutation).ToGqlName())
+            .Authorize()
             .Argument("input", argument => argument.Type<NonNullType<SendCommandInputType>>()
                                                    .Description("Input data for send command."))
             .ResolveWith<SendCommandResolver>(resolver => resolver.SendCommandAsync(default!, default!, default!))

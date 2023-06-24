@@ -6,6 +6,7 @@ public class GetUserByIdQuery : ObjectTypeExtension<Query>
     {
         descriptor
             .Field(nameof(GetUserByIdQuery).ToGqlName())
+            .Authorize()
             .Argument("id", argument => argument.Type<NonNullType<IdType>>())
             .ResolveWith<GetUserByIdResolver>(resolver => resolver.GetUserByIdAsync(default!, default!))
             .Description("Get user by id.");
