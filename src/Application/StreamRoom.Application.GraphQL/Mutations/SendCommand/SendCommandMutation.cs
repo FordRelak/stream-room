@@ -1,6 +1,4 @@
 ﻿using HotChocolate.Subscriptions;
-using StreamRoom.Application.GraphQL.Dtos;
-using StreamRoom.Application.Repositories;
 
 namespace StreamRoom.Application.GraphQL.Mutations.SendCommand;
 

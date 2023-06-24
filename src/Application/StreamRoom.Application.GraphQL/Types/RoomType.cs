@@ -1,6 +1,4 @@
-﻿using StreamRoom.Application.Repositories;
-
-namespace StreamRoom.Application.GraphQL.Types;
+﻿namespace StreamRoom.Application.GraphQL.Types;
 
 public class RoomType : ObjectType<Room>
 {

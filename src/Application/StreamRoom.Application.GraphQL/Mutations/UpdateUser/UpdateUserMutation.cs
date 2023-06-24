@@ -1,5 +1,4 @@
 ﻿using AppAny.HotChocolate.FluentValidation;
-using StreamRoom.Application.Repositories;
 
 namespace StreamRoom.Application.GraphQL.Mutations.UpdateUser;
 

@@ -1,6 +1,4 @@
-﻿using StreamRoom.Application.Repositories;
-
-namespace StreamRoom.Application.GraphQL.Mutations.AddRoom;
+﻿namespace StreamRoom.Application.GraphQL.Mutations.AddRoom;
 
 public class AddRoomMutation : ObjectTypeExtension<Mutation>
 {

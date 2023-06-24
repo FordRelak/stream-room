@@ -1,6 +1,4 @@
-﻿using StreamRoom.Application.Repositories;
-
-namespace StreamRoom.Application.GraphQL.Queries.Users;
+﻿namespace StreamRoom.Application.GraphQL.Queries.Users;
 
 public class GetUserByIdQuery : ObjectTypeExtension<Query>
 {
