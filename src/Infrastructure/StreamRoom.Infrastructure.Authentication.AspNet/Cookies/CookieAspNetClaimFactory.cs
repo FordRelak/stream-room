@@ -12,7 +12,6 @@ internal class CookieAspNetClaimFactory : IClaimFactory
         var claims = new List<Claim>()
         {
             new Claim("userId", user.Id.ToString()),
-            new Claim("nickname", user.Nickname),
         };
 
         var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
