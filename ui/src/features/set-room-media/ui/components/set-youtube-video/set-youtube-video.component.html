@@ -1,0 +1,21 @@
+<form class="set-youtube-video" [ngClass]="getExtraClasses()" (ngSubmit)="setYoutubeVideo()">
+    <mat-form-field appearance="outline" class="set-youtube-video-input">
+        <mat-label>Youtube video url</mat-label>
+        <input
+            matInput
+            required
+            type="text"
+            [placeholder]="'https://www.youtube.com/watch?v=l8E0AZ2wJc0'"
+            [formControl]="urlFormControl" />
+        <mat-error *ngIf="urlFormControl.hasError('required')">You must write url</mat-error>
+        <mat-error *ngIf="urlFormControl.hasError('pattern')">Url is invalid</mat-error>
+    </mat-form-field>
+    <button
+        type="submit"
+        mat-raised-button
+        color="primary"
+        [disabled]="urlFormControl.invalid"
+        class="set-youtube-video-btn">
+        Play
+    </button>
+</form>

@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { RoomEntityModule } from '@entities/room';
 import { RoomListPageRouting } from './rooms-page-routing.module';
 import { UISharedModule } from '@shared/ui';
+import { SetYoutubeVideoComponent } from '@features/set-room-media';
 
 @NgModule({
     declarations: [RoomListComponent, RoomDetailedComponent],
@@ -15,6 +16,7 @@ import { UISharedModule } from '@shared/ui';
         UISharedModule,
         RoomListPageRouting,
         AddRoomSmallButtonComponent,
+        SetYoutubeVideoComponent,
     ],
 })
 export class RoomListPageModule {}

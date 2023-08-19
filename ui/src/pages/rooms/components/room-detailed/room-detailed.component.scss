@@ -1,0 +1,17 @@
+@import 'mixins/sizes';
+@import 'mixins/flex';
+
+:host {
+    @include fill-100;
+    @include flex-column;
+}
+
+.room-detailed {
+    padding-top: 2rem;
+    margin: 0 50px;
+
+    &-set-youtube-video {
+        max-width: 400px;
+        width: 100%;
+    }
+}

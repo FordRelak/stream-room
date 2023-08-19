@@ -1,4 +1,5 @@
 @import './variables/colors';
+@import './mixins/flex';
 
 html,
 body {
@@ -6,4 +7,12 @@ body {
     margin: 0;
     font-family: Roboto, Helvetica Neue, sans-serif;
     background-color: $bg-color;
+}
+
+.flex-row {
+    @include flex-row;
+}
+
+.flex-column {
+    @include flex-column;
 }

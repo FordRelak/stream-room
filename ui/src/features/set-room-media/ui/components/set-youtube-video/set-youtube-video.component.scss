@@ -1,0 +1,17 @@
+@import 'mixins/flex';
+
+.set-youtube-video {
+    row-gap: 20px;
+
+    &.flex-row {
+        align-items: baseline;
+
+        .set-youtube-video-btn {
+            margin-left: 15px;
+        }
+    }
+
+    &-input {
+        width: 100%;
+    }
+}
