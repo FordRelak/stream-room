@@ -8,8 +8,7 @@
 
   <ItemGroup>
 	<PackageReference Include="AppAny.HotChocolate.FluentValidation" Version="0.11.0" />
-	<PackageReference Include="HotChocolate" Version="13.2.1" />
-	<PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+	<PackageReference Include="HotChocolate" Version="13.2.0" />
   </ItemGroup>
 
   <ItemGroup>

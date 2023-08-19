@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
-using StreamRoom.Application.Factories;
+using StreamRoom.Application.Claims;
 using StreamRoom.Domain;
 using System.Security.Claims;
 
@@ -11,7 +11,7 @@ internal class CookieAspNetClaimFactory : IClaimFactory
     {
         var claims = new List<Claim>()
         {
-            new Claim("userId", user.Id.ToString()),
+            new Claim(Constants.USER_ID, user.Id.ToString()),
         };
 
         var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

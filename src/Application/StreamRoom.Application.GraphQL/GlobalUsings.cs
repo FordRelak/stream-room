@@ -1,6 +1,6 @@
 ﻿global using HotChocolate;
 global using HotChocolate.Types;
-global using StreamRoom.Application.Factories;
+global using StreamRoom.Application.Claims;
 global using StreamRoom.Application.GraphQL.Common;
 global using StreamRoom.Application.GraphQL.Constants;
 global using StreamRoom.Application.GraphQL.Dtos;

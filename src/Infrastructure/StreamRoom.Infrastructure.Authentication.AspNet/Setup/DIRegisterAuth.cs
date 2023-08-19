@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using StreamRoom.Application.Factories;
+using StreamRoom.Application.Claims;
 using StreamRoom.Application.Services;
 using StreamRoom.Infrastructure.Authentication.AspNet.Cookies;
 
@@ -16,6 +16,8 @@ public static class DIRegisterAuth
         services.AddHttpContextAccessor();
 
         services.AddScoped<ISignInService, CookieAspNetSignInService>();
+
+        services.AddScoped<IClaimUserGetter, CookieAspNetClaimUserGetter>();
         services.AddSingleton<IClaimFactory, CookieAspNetClaimFactory>();
 
         return services;

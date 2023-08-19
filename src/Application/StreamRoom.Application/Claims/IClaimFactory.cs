@@ -1,7 +1,7 @@
 ﻿using StreamRoom.Domain;
 using System.Security.Claims;
 
-namespace StreamRoom.Application.Factories;
+namespace StreamRoom.Application.Claims;
 
 public interface IClaimFactory
 {
