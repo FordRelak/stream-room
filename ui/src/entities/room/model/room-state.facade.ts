@@ -22,8 +22,8 @@ export class RoomStateFacade extends NgXsActionable {
 
     private readonly _isRoomsLoaded$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-    private readonly _isRoomLoadedDispachedActions = [RoomActions.Load];
-    private readonly _isRoomLoadedSuccessfulActions = [RoomActions.Load];
+    private readonly _isRoomLoadedDispachedActions = [RoomActions.LoadRooms];
+    private readonly _isRoomLoadedSuccessfulActions = [RoomActions.LoadRooms];
 
     constructor(private readonly _store: Store, private readonly _storeActions: Actions) {
         super(_storeActions);
@@ -32,7 +32,11 @@ export class RoomStateFacade extends NgXsActionable {
     }
 
     public loadRooms(): void {
-        this._store.dispatch(RoomActions.Load);
+        this._store.dispatch(RoomActions.LoadRooms);
+    }
+
+    public loadRoom(id: string): void {
+        this._store.dispatch(new RoomActions.LoadRoom(id));
     }
 
     public createAndJoin(newRoomModel: AddRoomModel): void {

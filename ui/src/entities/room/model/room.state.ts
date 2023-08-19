@@ -26,7 +26,7 @@ const roomStateModelDefaults: RoomStateModel = {
 export class RoomState {
     constructor(private readonly _roomApi: RoomApi) {}
 
-    @Action(RoomActions.Load)
+    @Action(RoomActions.LoadRooms)
     public loadRooms(context: StateContext<RoomStateModel>): Observable<Room[]> {
         return this._roomApi.getRooms().pipe(tap((rooms) => context.patchState({ rooms })));
     }
@@ -38,9 +38,19 @@ export class RoomState {
                 context.patchState({
                     currentRoom: {
                         id: roomId,
+                        src: '',
                         ...newRoom,
                     },
                 });
+            })
+        );
+    }
+
+    @Action(RoomActions.LoadRoom)
+    public loadRoom(context: StateContext<RoomStateModel>, { id }: RoomActions.LoadRoom): Observable<void> {
+        return this._roomApi.getRoom(id).pipe(
+            map((room) => {
+                context.patchState({ currentRoom: room });
             })
         );
     }

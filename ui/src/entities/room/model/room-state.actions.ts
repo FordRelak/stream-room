@@ -11,7 +11,12 @@ export namespace RoomActions {
         constructor(public id: string) {}
     }
 
-    export class Load {
+    export class LoadRooms {
         static readonly type: string = '[ROOM] Get Rooms';
+    }
+
+    export class LoadRoom {
+        static readonly type: string = '[ROOM] Get Room';
+        constructor(public id: string) {}
     }
 }

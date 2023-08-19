@@ -6,4 +6,5 @@ export const environment: IEnvironment = {
     production: true,
     graphqlUri: '/graphql',
     wsUri: '/graphql',
+    youtubeRegex: '',
 };

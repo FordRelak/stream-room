@@ -6,7 +6,9 @@ import { NgModule } from '@angular/core';
 import { RoomEntityModule } from '@entities/room';
 import { RoomListPageRouting } from './rooms-page-routing.module';
 import { UISharedModule } from '@shared/ui';
-import { SetYoutubeVideoComponent } from '@features/set-room-media';
+import { YouTubePlayerModule } from '@angular/youtube-player';
+import { SetYoutubeMediaModule, YOUTUBE_REGEX } from '@features/set-youtube-media';
+import { EnvironmentService } from '@shared/lib';
 
 @NgModule({
     declarations: [RoomListComponent, RoomDetailedComponent],
@@ -16,7 +18,16 @@ import { SetYoutubeVideoComponent } from '@features/set-room-media';
         UISharedModule,
         RoomListPageRouting,
         AddRoomSmallButtonComponent,
-        SetYoutubeVideoComponent,
+        YouTubePlayerModule,
+        SetYoutubeMediaModule,
+    ],
+    providers: [
+        {
+            provide: YOUTUBE_REGEX,
+            deps: [EnvironmentService],
+            useFactory: (environmentService: EnvironmentService) =>
+                environmentService.get<string | RegExp>('youtubeRegex'),
+        },
     ],
 })
 export class RoomListPageModule {}
