@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { DirectiveSharedModule } from '@shared/lib/directives';
 import { SetYoutubeVideoComponent } from './ui';
+import { YoutubeService } from './lib';
 
 @NgModule({
     declarations: [SetYoutubeVideoComponent],
@@ -19,5 +20,6 @@ import { SetYoutubeVideoComponent } from './ui';
         DirectiveSharedModule,
     ],
     exports: [SetYoutubeVideoComponent],
+    providers: [YoutubeService],
 })
 export class SetYoutubeMediaModule {}

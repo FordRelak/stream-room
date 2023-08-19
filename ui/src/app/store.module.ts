@@ -7,7 +7,6 @@ import { RoomState } from '@entities/room';
 import { RoomStateCurrentRoomListenerRedirectorService } from '@processes/state-listeners';
 import { UserProfileState } from '@entities/userprofile';
 import { environment } from '@env/environment';
-import { RoomIdService } from '@processes/url-listeners';
 
 @NgModule({
     declarations: [],
@@ -26,11 +25,10 @@ import { RoomIdService } from '@processes/url-listeners';
             namespace: 'stream-room',
         }),
     ],
-    providers: [RoomStateCurrentRoomListenerRedirectorService, RoomIdService],
+    providers: [RoomStateCurrentRoomListenerRedirectorService],
 })
 export class StoreModule {
     constructor(
-        private readonly _roomStateCurrentRoomListenerRedirectorService: RoomStateCurrentRoomListenerRedirectorService,
-        private readonly _roomIdService: RoomIdService
+        private readonly _roomStateCurrentRoomListenerRedirectorService: RoomStateCurrentRoomListenerRedirectorService
     ) {}
 }
