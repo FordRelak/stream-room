@@ -14,7 +14,7 @@ export class RoomDetailedComponent extends Destroyable {
     public readonly currentRoom$ = this._roomStateFacade.currentRoom$;
 
     public readonly videoId$ = this.currentRoom$.pipe(
-        map((room) => this._youtubeService.extractVideoId(room.src))
+        map((room) => this._youtubeService.extractVideoId(room.source))
     );
 
     constructor(

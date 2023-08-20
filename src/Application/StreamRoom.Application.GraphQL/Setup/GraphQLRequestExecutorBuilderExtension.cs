@@ -5,6 +5,7 @@ using StreamRoom.Application.GraphQL.Mutations.AddUser;
 using StreamRoom.Application.GraphQL.Mutations.AddUserToRoom;
 using StreamRoom.Application.GraphQL.Mutations.RemoveUserFromRoom;
 using StreamRoom.Application.GraphQL.Mutations.SendCommand;
+using StreamRoom.Application.GraphQL.Mutations.SetRoomSource;
 using StreamRoom.Application.GraphQL.Mutations.UpdateUser;
 using StreamRoom.Application.GraphQL.Queries.Rooms;
 using StreamRoom.Application.GraphQL.Queries.Users;
@@ -25,6 +26,7 @@ public static class GraphQLRequestExecutorBuilderExtension
             .AddType<RemoveUserFromRoomInputType>()
             .AddType<SendCommandInputType>()
             .AddType<UpdateUserInputType>()
+            .AddType<SetRoomSourceInputType>()
 
             .AddQueryType<Query>()
             .AddTypeExtension<GetRoomsQuery>()
@@ -39,6 +41,7 @@ public static class GraphQLRequestExecutorBuilderExtension
             .AddTypeExtension<RemoveUserFromRoomMutation>()
             .AddTypeExtension<SendCommandMutation>()
             .AddTypeExtension<UpdateUserMutation>()
+            .AddTypeExtension<SetRoomSourceMutation>()
 
             .AddSubscriptionType<Subscription>()
             .AddTypeExtension<ConsumeRoomCommandsSubscription>()

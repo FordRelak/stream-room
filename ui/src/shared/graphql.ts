@@ -52,6 +52,12 @@ export type AddUserToRoomPayload = {
   roomId: Scalars['UUID'];
 };
 
+export enum ApplyPolicy {
+  AfterResolver = 'AFTER_RESOLVER',
+  BeforeResolver = 'BEFORE_RESOLVER',
+  Validation = 'VALIDATION'
+}
+
 export type CommandPayload = {
   __typename?: 'CommandPayload';
   commandType: CommandTypeEnum;
@@ -63,10 +69,10 @@ export type CommandPayload = {
 export enum CommandTypeEnum {
   Pause = 'PAUSE',
   Play = 'PLAY',
-  Rewind = 'REWIND'
+  Rewind = 'REWIND',
+  SourceHasChanged = 'SOURCE_HAS_CHANGED'
 }
 
-/** Remove user from room. */
 export type Mutation = {
   __typename?: 'Mutation';
   /** Add room. */
@@ -79,42 +85,43 @@ export type Mutation = {
   removeUserFromRoom: RemoveUserFromRoomPayload;
   /** Send command. */
   sendCommand: SendCommandPayload;
+  /** Change room source */
+  setRoomSource: SetRoomSourcePayload;
   /** Update user. */
   updateUser: UpdateUserPayload;
 };
 
 
-/** Remove user from room. */
 export type MutationAddRoomArgs = {
   input: AddRoomInput;
 };
 
 
-/** Remove user from room. */
 export type MutationAddUserArgs = {
   input: AddUserInput;
 };
 
 
-/** Remove user from room. */
 export type MutationAddUserToRoomArgs = {
   input: AddUserToRoomInput;
 };
 
 
-/** Remove user from room. */
 export type MutationRemoveUserFromRoomArgs = {
   input: RemoveUserFromRoomInput;
 };
 
 
-/** Remove user from room. */
 export type MutationSendCommandArgs = {
   input: SendCommandInput;
 };
 
 
-/** Remove user from room. */
+export type MutationSetRoomSourceArgs = {
+  input: SetRoomSourceInput;
+};
+
+
 export type MutationUpdateUserArgs = {
   input: UpdateUserInput;
 };
@@ -157,14 +164,21 @@ export type RemoveUserFromRoomPayload = {
 
 export type Room = {
   __typename?: 'Room';
+  adminId: Scalars['UUID'];
   /** Room Id. */
   id?: Maybe<Scalars['UUID']>;
+  isAdmin: Scalars['Boolean'];
   /** Room name. */
   name?: Maybe<Scalars['String']>;
   /** Room media source is playing now. */
-  src?: Maybe<Scalars['String']>;
-  /** Room user ids. */
+  source?: Maybe<Scalars['String']>;
+  /** Room users. */
   users: Array<User>;
+};
+
+
+export type RoomIsAdminArgs = {
+  userId: Scalars['UUID'];
 };
 
 export type SendCommandInput = {
@@ -178,6 +192,18 @@ export type SendCommandInput = {
 
 export type SendCommandPayload = {
   __typename?: 'SendCommandPayload';
+  isSuccess: Scalars['Boolean'];
+};
+
+export type SetRoomSourceInput = {
+  /** Room id. */
+  roomId: Scalars['UUID'];
+  /** New source. */
+  source: Scalars['String'];
+};
+
+export type SetRoomSourcePayload = {
+  __typename?: 'SetRoomSourcePayload';
   isSuccess: Scalars['Boolean'];
 };
 
@@ -218,12 +244,19 @@ export type AddRoomMutationVariables = Exact<{
 
 export type AddRoomMutation = { __typename?: 'Mutation', addRoom: { __typename?: 'AddRoomPayload', id: any } };
 
+export type SetRoomSourceMutationVariables = Exact<{
+  input: SetRoomSourceInput;
+}>;
+
+
+export type SetRoomSourceMutation = { __typename?: 'Mutation', setRoomSource: { __typename?: 'SetRoomSourcePayload', isSuccess: boolean } };
+
 export type RoomQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type RoomQuery = { __typename?: 'Query', room?: { __typename?: 'Room', id?: any | null, name?: string | null, src?: string | null } | null };
+export type RoomQuery = { __typename?: 'Query', room?: { __typename?: 'Room', id?: any | null, name?: string | null, source?: string | null } | null };
 
 export type RoomsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -253,7 +286,8 @@ export type UserQuery = { __typename?: 'Query', user?: { __typename?: 'User', id
 
 
 export const AddRoomDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"addRoom"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"AddRoomInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"addRoom"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<AddRoomMutation, AddRoomMutationVariables>;
-export const RoomDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Room"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"room"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"src"}}]}}]}}]} as unknown as DocumentNode<RoomQuery, RoomQueryVariables>;
+export const SetRoomSourceDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"setRoomSource"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"SetRoomSourceInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"setRoomSource"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"isSuccess"}}]}}]}}]} as unknown as DocumentNode<SetRoomSourceMutation, SetRoomSourceMutationVariables>;
+export const RoomDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Room"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"room"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"source"}}]}}]}}]} as unknown as DocumentNode<RoomQuery, RoomQueryVariables>;
 export const RoomsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Rooms"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rooms"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<RoomsQuery, RoomsQueryVariables>;
 export const CreateUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"user"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"AddUserInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"addUser"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"user"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<CreateUserMutation, CreateUserMutationVariables>;
 export const UpdateUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"user"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UpdateUserInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateUser"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"user"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<UpdateUserMutation, UpdateUserMutationVariables>;

@@ -8,13 +8,16 @@ import {
     AddRoomMutation,
     AddRoomMutationVariables,
     AddRoomDocument,
+    SetRoomSourceMutation,
+    SetRoomSourceMutationVariables,
+    SetRoomSourceDocument,
 } from '@shared/graphql';
 import { Observable, map } from 'rxjs';
 
 import { GraphQLApi } from '../graphql.api';
 import { Injectable } from '@angular/core';
 import { Room } from '@shared/types';
-import { AddRoomModel } from './models';
+import { AddRoomModel, SetRoomSourceModel } from './models';
 
 @Injectable({
     providedIn: 'root',
@@ -44,5 +47,16 @@ export class RoomApi {
                 },
             })
             .pipe(map((addRoomMutation) => addRoomMutation.addRoom.id));
+    }
+
+    public setSource(newSourceModel: SetRoomSourceModel): Observable<void> {
+        return this._api
+            .mutate<SetRoomSourceMutation, SetRoomSourceMutationVariables>(SetRoomSourceDocument, {
+                input: {
+                    roomId: newSourceModel.roomId,
+                    source: newSourceModel.source,
+                },
+            })
+            .pipe(map(() => {}));
     }
 }

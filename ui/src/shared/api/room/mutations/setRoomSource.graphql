@@ -1,0 +1,5 @@
+mutation setRoomSource($input: SetRoomSourceInput!) {
+    setRoomSource(input: $input) {
+        isSuccess
+    }
+}

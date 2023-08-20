@@ -4,5 +4,6 @@ public enum CommandTypeEnum
 {
     Pause,
     Play,
-    Rewind
+    Rewind,
+    SourceHasChanged
 }

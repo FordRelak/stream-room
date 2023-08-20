@@ -17,10 +17,10 @@ public class RoomType : ObjectType<Room>
         descriptor
             .Field($"{nameof(User)}s".ToGqlName())
             .ResolveWith<RoomUsersResolver>(resolver => resolver.GetRoomUsersAsync(default!, default!, default!))
-            .Description("Room user ids.");
+            .Description("Room users.");
 
         descriptor
-            .Field(type => type.Src)
+            .Field(type => type.Source)
             .Type<StringType>()
             .Description("Room media source is playing now.");
 

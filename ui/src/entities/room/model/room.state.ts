@@ -1,5 +1,5 @@
 import { Action, Selector, SelectorOptions, State, StateContext } from '@ngxs/store';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, map, of, tap } from 'rxjs';
 
 import { Injectable } from '@angular/core';
 import { ROOM_STATE_TOKEN } from './room-state.token';
@@ -38,7 +38,7 @@ export class RoomState {
                 context.patchState({
                     currentRoom: {
                         id: roomId,
-                        src: '',
+                        source: '',
                         ...newRoom,
                     },
                 });
@@ -53,6 +53,20 @@ export class RoomState {
                 context.patchState({ currentRoom: room });
             })
         );
+    }
+
+    @Action(RoomActions.SetSource)
+    public setSource(
+        context: StateContext<RoomStateModel>,
+        { source }: RoomActions.SetSource
+    ): Observable<void> {
+        const currentRoomId = context.getState().currentRoom?.id;
+
+        if (!currentRoomId) {
+            return of();
+        }
+
+        return this._roomApi.setSource({ roomId: currentRoomId, source });
     }
 
     @Selector([ROOM_STATE_TOKEN])

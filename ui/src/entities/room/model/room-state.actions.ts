@@ -19,4 +19,9 @@ export namespace RoomActions {
         static readonly type: string = '[ROOM] Get Room';
         constructor(public id: string) {}
     }
+
+    export class SetSource {
+        static readonly type: string = '[ROOM] Set Src';
+        constructor(public source: string) {}
+    }
 }

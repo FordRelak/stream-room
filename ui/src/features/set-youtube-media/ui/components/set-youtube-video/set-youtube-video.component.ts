@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { RoomStateFacade } from '@entities/room';
 import { YOUTUBE_REGEX } from '@features/set-youtube-media/youtube-regex.token';
 import { FormDirection } from '@shared/types/form-direction';
 
@@ -15,12 +16,15 @@ export class SetYoutubeVideoComponent {
 
     public readonly urlFormControl: FormControl;
 
-    constructor(@Inject(YOUTUBE_REGEX) regex: string | RegExp) {
+    constructor(
+        @Inject(YOUTUBE_REGEX) regex: string | RegExp,
+        private readonly _roomStateFacade: RoomStateFacade
+    ) {
         this.urlFormControl = new FormControl('', [Validators.required, Validators.pattern(regex)]);
     }
 
     public setYoutubeVideo(): void {
-        console.log(this.urlFormControl.value);
+        this._roomStateFacade.setSource(this.urlFormControl.value);
     }
 
     public getExtraClasses(): string {
