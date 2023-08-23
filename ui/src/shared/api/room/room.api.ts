@@ -11,12 +11,18 @@ import {
     SetRoomSourceMutation,
     SetRoomSourceMutationVariables,
     SetRoomSourceDocument,
+    RoomCommandSubscriptionVariables,
+    RoomCommandDocument,
+    RoomCommandSubscription,
+    RoomSourceQuery,
+    RoomSourceQueryVariables,
+    RoomSourceDocument,
 } from '@shared/graphql';
 import { Observable, map } from 'rxjs';
 
 import { GraphQLApi } from '../graphql.api';
 import { Injectable } from '@angular/core';
-import { Room } from '@shared/types';
+import { Command, Room } from '@shared/types';
 import { AddRoomModel, SetRoomSourceModel } from './models';
 
 @Injectable({
@@ -58,5 +64,21 @@ export class RoomApi {
                 },
             })
             .pipe(map(() => {}));
+    }
+
+    public listenCommands(roomId: string): Observable<Command> {
+        return this._api
+            .subscribe<RoomCommandSubscription, RoomCommandSubscriptionVariables>(RoomCommandDocument, {
+                roomId,
+            })
+            .pipe(map((roomCommandSubscription) => roomCommandSubscription.consumeRoomCommands));
+    }
+
+    public updateSource(roomId: string): Observable<string | undefined> {
+        return this._api
+            .get<RoomSourceQuery, RoomSourceQueryVariables>(RoomSourceDocument, {
+                roomId,
+            })
+            .pipe(map((roomSourceQuery) => roomSourceQuery.room?.source ?? undefined));
     }
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RoomStateFacade } from '@entities/room';
 import { YoutubeService } from '@features/set-youtube-media';
+import { RoomCommandListenerService } from '@pages/rooms/lib';
 import { Destroyable } from '@shared/lib';
 import { map, takeUntil } from 'rxjs';
 
@@ -9,6 +10,7 @@ import { map, takeUntil } from 'rxjs';
     selector: 'app-room-detailed',
     templateUrl: './room-detailed.component.html',
     styleUrls: ['./room-detailed.component.scss'],
+    providers: [RoomCommandListenerService],
 })
 export class RoomDetailedComponent extends Destroyable {
     public readonly currentRoom$ = this._roomStateFacade.currentRoom$;
@@ -18,9 +20,9 @@ export class RoomDetailedComponent extends Destroyable {
     );
 
     constructor(
+        route: ActivatedRoute,
         private readonly _roomStateFacade: RoomStateFacade,
-        private readonly _youtubeService: YoutubeService,
-        route: ActivatedRoute
+        private readonly _youtubeService: YoutubeService
     ) {
         super();
 

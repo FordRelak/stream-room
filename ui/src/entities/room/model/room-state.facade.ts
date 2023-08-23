@@ -47,6 +47,10 @@ export class RoomStateFacade extends NgXsActionable {
         this._store.dispatch(new RoomActions.SetSource(source));
     }
 
+    public updateSource(): void {
+        this._store.dispatch(RoomActions.UpdateSource);
+    }
+
     private _configureIsRoomLoaded() {
         this.isRoomsLoaded$ = this._isRoomsLoaded$.asObservable();
 

@@ -24,4 +24,8 @@ export namespace RoomActions {
         static readonly type: string = '[ROOM] Set Src';
         constructor(public source: string) {}
     }
+
+    export class UpdateSource {
+        static readonly type: string = '[ROOM] Update source';
+    }
 }

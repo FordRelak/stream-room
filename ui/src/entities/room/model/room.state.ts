@@ -69,6 +69,28 @@ export class RoomState {
         return this._roomApi.setSource({ roomId: currentRoomId, source });
     }
 
+    @Action(RoomActions.UpdateSource)
+    public updateSoruce(context: StateContext<RoomStateModel>): Observable<void> {
+        const state = context.getState();
+
+        if (!state.currentRoom) {
+            return of();
+        }
+
+        return this._roomApi.updateSource(state.currentRoom.id).pipe(
+            map((source) => {
+                if (source && state.currentRoom) {
+                    context.patchState({
+                        currentRoom: {
+                            ...state.currentRoom,
+                            source,
+                        },
+                    });
+                }
+            })
+        );
+    }
+
     @Selector([ROOM_STATE_TOKEN])
     static rooms(state: RoomStateModel): Room[] {
         return state.rooms;
