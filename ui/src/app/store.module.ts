@@ -7,11 +7,12 @@ import { RoomState } from '@entities/room';
 import { RoomStateCurrentRoomListenerRedirectorService } from '@processes/state-listeners';
 import { UserProfileState } from '@entities/userprofile';
 import { environment } from '@env/environment';
+import { PlayerState } from '@entities/player';
 
 @NgModule({
     declarations: [],
     imports: [
-        NgxsModule.forRoot([RoomState, UserProfileState], {
+        NgxsModule.forRoot([RoomState, UserProfileState, PlayerState], {
             developmentMode: !environment.production,
         }),
         NgxsReduxDevtoolsPluginModule.forRoot(),

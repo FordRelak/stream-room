@@ -70,7 +70,7 @@ export class RoomState {
     }
 
     @Action(RoomActions.UpdateSource)
-    public updateSoruce(context: StateContext<RoomStateModel>): Observable<void> {
+    public updateSource(context: StateContext<RoomStateModel>): Observable<void> {
         const state = context.getState();
 
         if (!state.currentRoom) {

@@ -9,6 +9,7 @@ import { UISharedModule } from '@shared/ui';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 import { SetYoutubeMediaModule, YOUTUBE_REGEX } from '@features/set-youtube-media';
 import { EnvironmentService } from '@shared/lib';
+import { PlayerEntityModule } from '@entities/player';
 
 @NgModule({
     declarations: [RoomListComponent, RoomDetailedComponent],
@@ -20,6 +21,7 @@ import { EnvironmentService } from '@shared/lib';
         AddRoomSmallButtonComponent,
         YouTubePlayerModule,
         SetYoutubeMediaModule,
+        PlayerEntityModule,
     ],
     providers: [
         {

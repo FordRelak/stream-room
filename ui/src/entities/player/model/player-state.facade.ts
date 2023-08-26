@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { PlayerState } from './player.state';
-import { Observable } from '@apollo/client';
 import { PlayerStatus } from './player-state.model';
 import { PlayerActions } from './player-state.actions';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class PlayerStateFacade {
